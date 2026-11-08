@@ -1,0 +1,26 @@
+{
+  "name": "la-esquina-de-iturri",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbuenoar/la-esquina-de-iturri.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sbuenoar/la-esquina-de-iturri/issues"
+  },
+  "homepage": "https://github.com/sbuenoar/la-esquina-de-iturri#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.0"
+  }
+}

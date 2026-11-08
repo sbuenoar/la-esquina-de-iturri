@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#185b45">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="La Esquina">
+
 <title>La comunidad en tu celular | La Esquina de Iturri tu Barrio</title>
 <style>
 :root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
@@ -126,14 +132,47 @@ body > header {
 
 
 
-<section class="hero"><div>📱</div><h1>La comunidad en tu celular</h1><p>La futura aplicación móvil permitirá consultar información barrial y facilitar la participación desde el teléfono.</p></section>
+<section class="hero"><div>📱</div><h1>La comunidad en tu celular</h1><p>Instalá La Esquina de Iturri en tu celular Android y participá de nuestra comunidad.</p></section>
 <main>
-<section class="cards">
-<article class="card"><div class="emoji">🔔</div><h2>Recordatorios</h2><p>Notificaciones de actividades y recordatorios barriales, configurados según horarios confirmados.</p></article>
-<article class="card"><div class="emoji">📷</div><h2>Reportes rápidos</h2><p>La propuesta contempla describir un problema y, cuando corresponda, adjuntar una foto y ubicación.</p></article>
-<article class="card"><div class="emoji">🎟️</div><h2>Acceso a eventos</h2><p>Podremos evaluar códigos QR para facilitar el ingreso a actividades comunitarias.</p></article>
+
+<section class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+  <article class="card" style="text-align:center;">
+    <div class="emoji">📲</div>
+    <h2>Instalá La Esquina de Iturri</h2>
+    <p>Agregá nuestra aplicación a tu celular Android y accedé a la comunidad desde tu pantalla de inicio.</p>
+    <button id="iturriInstalar" type="button" style="width:100%;font-size:1.1rem;padding:16px;">
+      INSTALAR LA ESQUINA
+    </button>
+    <p id="iturriEstadoInstalacion" role="status" aria-live="polite">
+      Abrí esta página con Google Chrome en tu Android.
+    </p>
+  </article>
+
+  <article class="card" style="text-align:center;">
+    <div class="emoji">📷</div>
+    <h2>Instalación mediante QR</h2>
+    <p>Escaneá este código con la cámara de tu celular Android.</p>
+    <a href="https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/app-movil.html" target="_blank" rel="noopener noreferrer">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fla-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app%2Fapp-movil.html" alt="Código QR para abrir La Esquina de Iturri"
+           width="220" height="220" style="max-width:100%;height:auto;">
+    </a>
+    <p><a href="https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/app-movil.html">Abrir La Esquina de Iturri</a></p>
+  </article>
+
+  <article class="card">
+    <div class="emoji">📱</div>
+    <h2>¿Cómo instalar?</h2>
+    <ol>
+      <li>Abrí el enlace con Google Chrome.</li>
+      <li>Presioná «Instalar» o «Agregar a pantalla principal».</li>
+      <li>Confirmá la instalación.</li>
+      <li>Encontrá el icono de La Esquina en tu celular.</li>
+    </ol>
+    <p class="muted">La instalación no requiere descargar un archivo APK.</p>
+  </article>
 </section>
-<section class="card"><h2>Integración con MIT App Inventor</h2><p>Para conectar la aplicación con esta web necesitaremos definir una API o servicio de datos, establecer permisos y probar el intercambio de información.</p><p class="notice">La aplicación móvil aún no está conectada. Esta página presenta las funciones previstas, no funciones activas.</p></section></main>
+
+</main>
 <footer><p><strong>La Esquina de Iturri tu Barrio</strong></p><p>Hacemos Barrio · Comunidad Activa</p><p><a href="index.html" style="color:white">Volver al inicio</a></p></footer>
 
 <section class="iturri-musica" aria-label="Música del proyecto">
@@ -181,5 +220,63 @@ body > header {
  actualizar();
 })();
 </script>
+
+
+
+<script>
+(() => {
+  let instalacionPendiente = null;
+  const boton = document.getElementById("iturriInstalar");
+  const estado = document.getElementById("iturriEstadoInstalacion");
+
+  if (!boton || !estado) return;
+
+  const instalada = window.matchMedia("(display-mode: standalone)").matches;
+
+  if (instalada) {
+    estado.textContent = "La aplicación ya está instalada en este dispositivo.";
+    boton.textContent = "APLICACIÓN INSTALADA";
+    boton.disabled = true;
+  }
+
+  window.addEventListener("beforeinstallprompt", evento => {
+    evento.preventDefault();
+    instalacionPendiente = evento;
+    estado.textContent = "Tu Android está listo para instalar la aplicación.";
+  });
+
+  boton.addEventListener("click", async () => {
+    if (instalada) return;
+
+    if (instalacionPendiente) {
+      instalacionPendiente.prompt();
+      const resultado = await instalacionPendiente.userChoice;
+      estado.textContent = resultado.outcome === "accepted"
+        ? "¡Perfecto! Se inició la instalación."
+        : "Podés instalarla más tarde desde Chrome.";
+      instalacionPendiente = null;
+    } else {
+      estado.textContent =
+        "En Chrome, abrí el menú ⋮ y elegí «Instalar aplicación» o «Agregar a pantalla principal».";
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    estado.textContent = "¡La Esquina de Iturri quedó instalada!";
+    boton.textContent = "APLICACIÓN INSTALADA";
+    boton.disabled = true;
+  });
+})();
+</script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(error => {
+          console.error("No se pudo registrar la aplicación PWA:", error);
+        });
+      });
+    }
+  </script>
 
 </body></html>

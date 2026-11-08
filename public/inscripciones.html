@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#185b45">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="La Esquina">
+
 <title>Inscripciones | La Esquina de Iturri tu Barrio</title>
 <style>
 :root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
@@ -413,5 +419,16 @@ formulario.addEventListener("submit", async (e) => {
   window.addEventListener('load', reproducir);
 })();
 </script>
+
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(error => {
+          console.error("No se pudo registrar la aplicación PWA:", error);
+        });
+      });
+    }
+  </script>
 
 </body></html>

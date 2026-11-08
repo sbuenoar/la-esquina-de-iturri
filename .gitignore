@@ -81,3 +81,17 @@ id_ed25519
 *credentials*.json
 *credential*.json
 .DS_Store
+
+# Proteccion de firma Android
+*.jks
+*.keystore
+*.aab
+android/app/build/
+android/.gradle/
+.gradle/
+public/*.bak*
+*.apk
+
+# Respaldos: no distribuir ni incorporar al APK
+www/**/*.respaldo*
+www/**/*.bak*

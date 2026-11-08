@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "La Esquina de Iturri tu Barrio",
+  "short_name": "La Esquina",
+  "description": "Comunidad activa, solidaria y colaborativa de La Esquina de Iturri.",
+  "lang": "es-AR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf7ed",
+  "theme_color": "#185b45",
+  "icons": [
+    {
+      "src": "/assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

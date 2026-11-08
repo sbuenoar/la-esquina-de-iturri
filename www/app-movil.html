@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="La Esquina">
+
+<title>La comunidad en tu celular | La Esquina de Iturri tu Barrio</title>
+<style>
+:root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
+*{box-sizing:border-box}body{margin:0;background:var(--crema);color:var(--texto);font:16px/1.6 Arial,Helvetica,sans-serif}
+header{background:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #e4e7df}
+.marca{font-weight:800;color:var(--verde)}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{font-size:.9rem;color:var(--texto);text-decoration:none;font-weight:700}nav a:hover{text-decoration:underline;color:var(--verde)}
+.hero{background:var(--verde);color:white;padding:42px 7%}.hero h1{font-size:clamp(2rem,4vw,3.4rem);margin:8px 0;line-height:1.15}.hero p{max-width:800px}
+main{max-width:1100px;margin:auto;padding:35px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e7df;border-radius:15px;padding:22px;margin-bottom:18px;box-shadow:0 5px 18px #203b2510}.card h2{color:var(--verde);margin-top:0;font-size:1.35rem}
+.emoji{font-size:2rem}.muted{color:#66756c;font-size:.92rem}.notice{background:#fff0d9;padding:12px;border-radius:8px}.item{border-left:4px solid var(--naranja);padding:4px 14px;margin:20px 0}.numero{font-size:2rem;font-weight:800;color:var(--verde)}
+form{display:grid;gap:10px}label{font-weight:700;margin-top:5px}input,select,textarea{font:inherit;width:100%;padding:11px;border:1px solid #c9d3ca;border-radius:8px;background:white}button{background:var(--verde);color:white;border:0;padding:12px 18px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}button:hover{opacity:.9}
+footer{background:#123f32;color:white;text-align:center;padding:24px 6%;margin-top:30px}footer p{margin:4px}@media(max-width:650px){header{align-items:flex-start}nav{gap:8px}.hero{padding:32px 6%}}
+
+/* Identidad visual compartida */
+.iturri-banner {
+  min-height: 145px;
+  padding: 25px 6%;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(15,55,39,.82), rgba(15,55,39,.15)),
+    url('assets/img/banner.jpeg') center 50% / cover no-repeat;
+  color: white;
+}
+.iturri-banner h2 {
+  color: white;
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  text-shadow: 0 2px 5px #0008;
+}
+.iturri-banner p { margin: 5px 0 0; }
+.iturri-musica {
+  background: #fff;
+  border-top: 3px solid #efaa55;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.iturri-musica label { font-weight: bold; }
+.iturri-musica select { max-width: 270px; }
+.iturri-musica audio { width: min(100%, 340px); }
+@media(max-width:600px) {
+  .iturri-banner { min-height: 120px; }
+  .iturri-musica { align-items: stretch; }
+  .iturri-musica select, .iturri-musica audio { max-width: 100%; width: 100%; }
+}
+
+
+/* Corrección de disposición: banner arriba, encabezado debajo */
+.iturri-banner {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 0 !important;
+  width: 100%;
+  margin: 0 !important;
+  float: none !important;
+  clear: both;
+}
+body > header {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 1;
+  width: 100%;
+  margin: 0 !important;
+  float: none !important;
+}
+
+</style>
+
+<style id="iturri-boton-musica-grande">
+#iturriPlay {
+  width: 76px !important;
+  height: 76px !important;
+  min-width: 76px;
+  min-height: 76px;
+  border-radius: 50% !important;
+  background: #001f5b !important;
+  color: #7cce32 !important;
+  border: 3px solid #173d80 !important;
+  font-size: 2.4rem !important;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#iturriPlay:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+#iturriPlay:focus-visible {
+  outline: 3px solid #7cce32;
+  outline-offset: 4px;
+}
+</style>
+
+  <link rel="stylesheet" href="estilos-comunes.css">
+</head>
+<body>
+<section class="iturri-banner" aria-label="Identidad de la comunidad">
+  <div>
+    <h2>Hacemos barrio</h2>
+    <p>La Esquina de Iturri · Comunidad activa, solidaria y colaborativa</p>
+  </div>
+</section>
+
+<header><a class="marca" href="index.html" style="text-decoration:none">🏡 La Esquina de Iturri tu Barrio</a><nav aria-label="Navegación principal"><a href="index.html">Inicio</a>
+<a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a>
+
+<a href="galeria.html">Galería</a>
+
+<a href="app-movil.html">App móvil</a></nav></header>
+
+
+
+<section class="hero"><div>📱</div><h1>La comunidad en tu celular</h1><p>Instalá La Esquina de Iturri en tu celular Android y participá de nuestra comunidad.</p></section>
+<main>
+
+<section class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+  <article class="card" style="text-align:center;">
+    <div class="emoji">📲</div>
+    <h2>Instalá La Esquina de Iturri</h2>
+    <p>Agregá nuestra aplicación a tu celular Android y accedé a la comunidad desde tu pantalla de inicio.</p>
+    <button id="iturriInstalar" type="button" style="width:100%;font-size:1.1rem;padding:16px;">
+      INSTALAR LA ESQUINA
+    </button>
+    <p id="iturriEstadoInstalacion" role="status" aria-live="polite">
+      Abrí esta página con Google Chrome en tu Android.
+    </p>
+  </article>
+
+  <article class="card" style="text-align:center;">
+    <div class="emoji">📷</div>
+    <h2>Instalación mediante QR</h2>
+    <p>Escaneá este código con la cámara de tu celular Android.</p>
+    <a href="https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/app-movil.html" target="_blank" rel="noopener noreferrer">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fla-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app%2Fapp-movil.html" alt="Código QR para abrir La Esquina de Iturri"
+           width="220" height="220" style="max-width:100%;height:auto;">
+    </a>
+    <p><a href="https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/app-movil.html">Abrir La Esquina de Iturri</a></p>
+  </article>
+
+  <article class="card">
+    <div class="emoji">📱</div>
+    <h2>¿Cómo instalar?</h2>
+    <ol>
+      <li>Abrí el enlace con Google Chrome.</li>
+      <li>Presioná «Instalar» o «Agregar a pantalla principal».</li>
+      <li>Confirmá la instalación.</li>
+      <li>Encontrá el icono de La Esquina en tu celular.</li>
+    </ol>
+    <p class="muted">La instalación no requiere descargar un archivo APK.</p>
+  </article>
+</section>
+
+</main>
+<footer><p><strong>La Esquina de Iturri tu Barrio</strong></p><p>Hacemos Barrio · Comunidad Activa</p><p><a href="index.html" style="color:white">Volver al inicio</a></p></footer>
+
+<section class="iturri-musica" aria-label="Música del proyecto">
+<label for="iturriCancion">🎵 Música comunitaria</label>
+<select id="iturriCancion" aria-label="Elegir música">
+<option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+<option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+<option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+</select>
+<button id="iturriPlay" type="button" aria-label="Reproducir música">▶</button>
+<audio id="iturriAudio" src="assets/audio/Phonky_Frog__Brillo.mp3" preload="auto" autoplay></audio>
+</section>
+<style>
+.iturri-musica{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:14px;margin:18px auto}
+.iturri-musica label{font-weight:bold}
+.iturri-musica select{max-width:270px;padding:8px;border-radius:10px}
+.iturri-musica #iturriPlay{width:58px;height:58px;border:0;border-radius:50%;background:#bfe9ff;color:#7cce32;font-size:29px;font-weight:900;cursor:pointer;box-shadow:0 3px 10px #0002}
+.iturri-musica audio{display:none}
+</style>
+<script>
+(() => {
+ const selector=document.getElementById('iturriCancion');
+ const audio=document.getElementById('iturriAudio');
+ const boton=document.getElementById('iturriPlay');
+ if(!selector||!audio||!boton)return;
+ audio.volume=0.35;
+ function actualizar(){
+  const suena=!audio.paused&&!audio.ended;
+  boton.textContent=suena?'Ⅱ':'▶';
+  boton.setAttribute('aria-label',suena?'Pausar música':'Reproducir música');
+ }
+ boton.addEventListener('click',()=>{
+  if(audio.paused)audio.play().then(actualizar).catch(actualizar);
+  else{audio.pause();actualizar();}
+ });
+ selector.addEventListener('change',()=>{
+  const sonaba=!audio.paused;
+  audio.pause();audio.src=selector.value;audio.load();actualizar();
+  if(sonaba)audio.play().then(actualizar).catch(actualizar);
+ });
+ audio.addEventListener('play',actualizar);
+ audio.addEventListener('pause',actualizar);
+ audio.addEventListener('ended',actualizar);
+ window.addEventListener('load',()=>audio.play().then(actualizar).catch(actualizar));
+ actualizar();
+})();
+</script>
+
+
+
+<script>
+(() => {
+  let instalacionPendiente = null;
+  const boton = document.getElementById("iturriInstalar");
+  const estado = document.getElementById("iturriEstadoInstalacion");
+
+  if (!boton || !estado) return;
+
+  const instalada = window.matchMedia("(display-mode: standalone)").matches;
+
+  if (instalada) {
+    estado.textContent = "La aplicación ya está instalada en este dispositivo.";
+    boton.textContent = "APLICACIÓN INSTALADA";
+    boton.disabled = true;
+  }
+
+  window.addEventListener("beforeinstallprompt", evento => {
+    evento.preventDefault();
+    instalacionPendiente = evento;
+    estado.textContent = "Tu Android está listo para instalar la aplicación.";
+  });
+
+  boton.addEventListener("click", async () => {
+    if (instalada) return;
+
+    if (instalacionPendiente) {
+      instalacionPendiente.prompt();
+      const resultado = await instalacionPendiente.userChoice;
+      estado.textContent = resultado.outcome === "accepted"
+        ? "¡Perfecto! Se inició la instalación."
+        : "Podés instalarla más tarde desde Chrome.";
+      instalacionPendiente = null;
+    } else {
+      estado.textContent =
+        "En Chrome, abrí el menú ⋮ y elegí «Instalar aplicación» o «Agregar a pantalla principal».";
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    estado.textContent = "¡La Esquina de Iturri quedó instalada!";
+    boton.textContent = "APLICACIÓN INSTALADA";
+    boton.disabled = true;
+  });
+})();
+</script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(error => {
+          console.error("No se pudo registrar la aplicación PWA:", error);
+        });
+      });
+    }
+  </script>
+
+</body></html>
