@@ -47,14 +47,25 @@ jobs:
       - name: Preparar Gradle
         run: chmod +x android/gradlew
 
-      - name: Compilar APK de prueba
-        working-directory: android
-        run: ./gradlew --no-daemon assembleDebug
+      - name: Preparar clave de firma
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/la-esquina-release.jks"
+          echo "ANDROID_KEYSTORE_FILE=$RUNNER_TEMP/la-esquina-release.jks" >> "$GITHUB_ENV"
 
-      - name: Guardar APK generado
+      - name: Compilar APK firmado
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon assembleRelease
+
+      - name: Guardar APK firmado
         uses: actions/upload-artifact@v4
         with:
-          name: La-Esquina-de-Iturri-APK-prueba
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: La-Esquina-de-Iturri-APK-firmado
+          path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 30
