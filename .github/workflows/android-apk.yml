@@ -32,6 +32,18 @@ jobs:
         run: |
           sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Sincronizar Capacitor Android
+        run: npx cap sync android
+
       - name: Preparar Gradle
         run: chmod +x android/gradlew
 
