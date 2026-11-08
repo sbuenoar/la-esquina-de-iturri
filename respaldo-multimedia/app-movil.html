@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>La comunidad en tu celular | La Esquina de Iturri tu Barrio</title>
+<style>
+:root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
+*{box-sizing:border-box}body{margin:0;background:var(--crema);color:var(--texto);font:16px/1.6 Arial,Helvetica,sans-serif}
+header{background:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #e4e7df}
+.marca{font-weight:800;color:var(--verde)}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{font-size:.9rem;color:var(--texto);text-decoration:none;font-weight:700}nav a:hover{text-decoration:underline;color:var(--verde)}
+.hero{background:var(--verde);color:white;padding:42px 7%}.hero h1{font-size:clamp(2rem,4vw,3.4rem);margin:8px 0;line-height:1.15}.hero p{max-width:800px}
+main{max-width:1100px;margin:auto;padding:35px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e7df;border-radius:15px;padding:22px;margin-bottom:18px;box-shadow:0 5px 18px #203b2510}.card h2{color:var(--verde);margin-top:0;font-size:1.35rem}
+.emoji{font-size:2rem}.muted{color:#66756c;font-size:.92rem}.notice{background:#fff0d9;padding:12px;border-radius:8px}.item{border-left:4px solid var(--naranja);padding:4px 14px;margin:20px 0}.numero{font-size:2rem;font-weight:800;color:var(--verde)}
+form{display:grid;gap:10px}label{font-weight:700;margin-top:5px}input,select,textarea{font:inherit;width:100%;padding:11px;border:1px solid #c9d3ca;border-radius:8px;background:white}button{background:var(--verde);color:white;border:0;padding:12px 18px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}button:hover{opacity:.9}
+footer{background:#123f32;color:white;text-align:center;padding:24px 6%;margin-top:30px}footer p{margin:4px}@media(max-width:650px){header{align-items:flex-start}nav{gap:8px}.hero{padding:32px 6%}}
+</style>
+</head>
+<body>
+<header><a class="marca" href="index.html" style="text-decoration:none">🏡 La Esquina de Iturri tu Barrio</a><nav aria-label="Navegación principal"><a href="index.html">Inicio</a>
+<a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a>
+<a href="reuniones.html">Reuniones</a>
+<a href="instituciones.html">Instituciones</a>
+<a href="estadisticas.html">Estadísticas</a>
+<a href="app-movil.html">App móvil</a></nav></header>
+<section class="hero"><div>📱</div><h1>La comunidad en tu celular</h1><p>La futura aplicación móvil permitirá consultar información barrial y facilitar la participación desde el teléfono.</p></section>
+<main>
+<section class="cards">
+<article class="card"><div class="emoji">🔔</div><h2>Recordatorios</h2><p>Notificaciones de actividades y recordatorios barriales, configurados según horarios confirmados.</p></article>
+<article class="card"><div class="emoji">📷</div><h2>Reportes rápidos</h2><p>La propuesta contempla describir un problema y, cuando corresponda, adjuntar una foto y ubicación.</p></article>
+<article class="card"><div class="emoji">🎟️</div><h2>Acceso a eventos</h2><p>Podremos evaluar códigos QR para facilitar el ingreso a actividades comunitarias.</p></article>
+</section>
+<section class="card"><h2>Integración con MIT App Inventor</h2><p>Para conectar la aplicación con esta web necesitaremos definir una API o servicio de datos, establecer permisos y probar el intercambio de información.</p><p class="notice">La aplicación móvil aún no está conectada. Esta página presenta las funciones previstas, no funciones activas.</p></section></main>
+<footer><p><strong>La Esquina de Iturri tu Barrio</strong></p><p>Hacemos Barrio · Comunidad Activa</p><p><a href="index.html" style="color:white">Volver al inicio</a></p></footer>
+</body></html>

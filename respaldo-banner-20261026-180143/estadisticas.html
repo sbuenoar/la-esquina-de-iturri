@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>Transparencia y estadísticas | La Esquina de Iturri tu Barrio</title>
+<style>
+:root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
+*{box-sizing:border-box}body{margin:0;background:var(--crema);color:var(--texto);font:16px/1.6 Arial,Helvetica,sans-serif}
+header{background:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #e4e7df}
+.marca{font-weight:800;color:var(--verde)}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{font-size:.9rem;color:var(--texto);text-decoration:none;font-weight:700}nav a:hover{text-decoration:underline;color:var(--verde)}
+.hero{background:var(--verde);color:white;padding:42px 7%}.hero h1{font-size:clamp(2rem,4vw,3.4rem);margin:8px 0;line-height:1.15}.hero p{max-width:800px}
+main{max-width:1100px;margin:auto;padding:35px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e7df;border-radius:15px;padding:22px;margin-bottom:18px;box-shadow:0 5px 18px #203b2510}.card h2{color:var(--verde);margin-top:0;font-size:1.35rem}
+.emoji{font-size:2rem}.muted{color:#66756c;font-size:.92rem}.notice{background:#fff0d9;padding:12px;border-radius:8px}.item{border-left:4px solid var(--naranja);padding:4px 14px;margin:20px 0}.numero{font-size:2rem;font-weight:800;color:var(--verde)}
+form{display:grid;gap:10px}label{font-weight:700;margin-top:5px}input,select,textarea{font:inherit;width:100%;padding:11px;border:1px solid #c9d3ca;border-radius:8px;background:white}button{background:var(--verde);color:white;border:0;padding:12px 18px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}button:hover{opacity:.9}
+footer{background:#123f32;color:white;text-align:center;padding:24px 6%;margin-top:30px}footer p{margin:4px}@media(max-width:650px){header{align-items:flex-start}nav{gap:8px}.hero{padding:32px 6%}}
+
+/* Identidad visual compartida */
+.iturri-banner {
+  min-height: 145px;
+  padding: 25px 6%;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(15,55,39,.82), rgba(15,55,39,.15)),
+    url('assets/img/banner.jpeg') center 50% / cover no-repeat;
+  color: white;
+}
+.iturri-banner h2 {
+  color: white;
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  text-shadow: 0 2px 5px #0008;
+}
+.iturri-banner p { margin: 5px 0 0; }
+.iturri-musica {
+  background: #fff;
+  border-top: 3px solid #efaa55;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.iturri-musica label { font-weight: bold; }
+.iturri-musica select { max-width: 270px; }
+.iturri-musica audio { width: min(100%, 340px); }
+@media(max-width:600px) {
+  .iturri-banner { min-height: 120px; }
+  .iturri-musica { align-items: stretch; }
+  .iturri-musica select, .iturri-musica audio { max-width: 100%; width: 100%; }
+}
+
+</style>
+</head>
+<body>
+<header><a class="marca" href="index.html" style="text-decoration:none">🏡 La Esquina de Iturri tu Barrio</a><nav aria-label="Navegación principal"><a href="index.html">Inicio</a>
+<a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a>
+<a href="reuniones.html">Reuniones</a>
+<a href="instituciones.html">Instituciones</a>
+<a href="estadisticas.html">Estadísticas</a>
+<a href="app-movil.html">App móvil</a></nav></header>
+
+<section class="iturri-banner" aria-label="Identidad de la comunidad">
+  <div>
+    <h2>Hacemos barrio</h2>
+    <p>La Esquina de Iturri · Comunidad activa, solidaria y colaborativa</p>
+  </div>
+</section>
+
+<section class="hero"><div>📊</div><h1>Transparencia y estadísticas</h1><p>Un espacio para presentar avances, reclamos y recursos con información clara y verificable.</p></section>
+<main>
+<section class="cards">
+<article class="card"><p class="muted">Reclamos recibidos</p><div class="numero">—</div><p>Se mostrará cuando haya datos reales conectados.</p></article>
+<article class="card"><p class="muted">Reclamos resueltos</p><div class="numero">—</div><p>Se contabilizarán con estados confirmados.</p></article>
+<article class="card"><p class="muted">Actividades comunitarias</p><div class="numero">—</div><p>Se actualizará con la agenda registrada.</p></article>
+</section>
+<section class="card"><h2>Fondos y objetivos</h2><p>Publicaremos objetivos, aportes y gastos respaldados por registros verificables, con fecha de actualización.</p><p class="notice">No se muestran cifras por ahora para evitar presentar datos de ejemplo como si fueran resultados reales.</p></section>
+<section class="card"><h2>Prioridad de reclamos</h2><p>Cuando la base de datos esté conectada, podremos visualizar la cantidad de reportes por categoría y una clasificación orientativa de prioridad.</p></section></main>
+<footer><p><strong>La Esquina de Iturri tu Barrio</strong></p><p>Hacemos Barrio · Comunidad Activa</p><p><a href="index.html" style="color:white">Volver al inicio</a></p></footer>
+
+<section class="iturri-musica" aria-label="Música del proyecto">
+  <label for="iturriCancion">🎵 Música comunitaria</label>
+  <select id="iturriCancion">
+    <option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+    <option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+    <option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+  </select>
+  <audio id="iturriAudio" controls preload="none">
+    <source src="assets/audio/New_Age_Whale__Moody.mp3" type="audio/mpeg">
+    Tu navegador no admite audio.
+  </audio>
+</section>
+<script>
+(() => {
+  const selector = document.getElementById('iturriCancion');
+  const audio = document.getElementById('iturriAudio');
+  if (!selector || !audio) return;
+  selector.addEventListener('change', () => {
+    audio.pause();
+    audio.src = selector.value;
+    audio.load();
+    audio.play().catch(() => {});
+  });
+})();
+</script>
+
+</body></html>

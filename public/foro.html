@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>Foro y urgencias | La Esquina de Iturri tu Barrio</title>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="estilos-comunes.css">
+
+<style id="foro-semanal-colores">
+  .iturri-banner {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border-top: 5px solid #c5223b;
+    border-bottom: 5px solid #f2c52b;
+  }
+  .iturri-banner h2,
+  .iturri-banner p {
+    color: #ffffff !important;
+  }
+  header {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border-bottom: 4px solid #f2c52b;
+  }
+  header .marca,
+  header nav a {
+    color: #ffffff !important;
+  }
+  header nav a:hover {
+    background: #bd2038 !important;
+    color: #ffffff !important;
+  }
+  .hero {
+    background: linear-gradient(125deg, #111111 0%, #bd2038 58%, #075ba5 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 6px solid #f2c52b;
+  }
+  .hero h1,
+  .hero p,
+  .hero div {
+    color: #ffffff !important;
+  }
+  main .card {
+    border-top: 4px solid #bd2038;
+  }
+  main .card:nth-of-type(2) {
+    border-top-color: #075ba5;
+  }
+  #formulario button[type="submit"] {
+    background: #bd2038 !important;
+    color: #ffffff !important;
+    border: 2px solid #f2c52b !important;
+    font-weight: 700;
+  }
+  .tema-semanal {
+    margin: 20px 0;
+    padding: 22px;
+    border: 2px solid #075ba5;
+    border-left: 8px solid #bd2038;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fff7d1 0%, #ffffff 60%, #eaf4ff 100%);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+    overflow-wrap: anywhere;
+  }
+  .tema-semanal .tema-etiqueta {
+    display: inline-block;
+    margin: 0 0 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .tema-semanal h3 {
+    margin: 4px 0 12px;
+    color: #111111;
+    font-size: clamp(1.2rem, 3vw, 1.65rem);
+  }
+  .tema-semanal p {
+    color: #222222;
+  }
+  .tema-semanal .tema-meta {
+    margin-bottom: 0;
+    padding-top: 10px;
+    border-top: 1px solid #c9d7e8;
+    font-size: 0.9rem;
+  }
+  .rotacion-foro {
+    border-left: 5px solid #f2c52b;
+    padding: 12px 14px;
+    background: #f5f8fc;
+    color: #202020;
+    border-radius: 8px;
+    line-height: 1.55;
+  }
+  .post {
+    border-left: 5px solid #075ba5;
+  }
+  .post .score {
+    color: #a81930;
+    font-weight: 800;
+  }
+  footer {
+    background: #111111 !important;
+    color: #ffffff !important;
+    border-top: 5px solid #bd2038;
+  }
+  footer p,
+  footer a {
+    color: #ffffff !important;
+  }
+  @media (max-width: 600px) {
+    .tema-semanal {
+      padding: 16px;
+      border-radius: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+<section class="iturri-banner" aria-label="Identidad de la comunidad">
+  <div>
+    <h2>Hacemos barrio</h2>
+    <p>La Esquina de Iturri · Comunidad activa, solidaria y colaborativa</p>
+  </div>
+</section>
+
+<header>
+<a class="marca" href="index.html">🏡 La Esquina de Iturri tu Barrio</a>
+<nav aria-label="Navegación principal">
+<a href="index.html">Inicio</a><a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a>
+<a href="galeria.html">Galería</a>
+<a href="app-movil.html">App móvil</a>
+</nav>
+</header>
+
+
+
+
+<section class="hero">
+<div>📣 Comunidad activa</div>
+<h1>Foro y urgencias</h1>
+<p>Contanos qué necesita el barrio. Entre todos podemos organizar los reportes y visualizar qué temas necesitan atención prioritaria.</p>
+</section>
+
+<main>
+
+
+<section class="card">
+<h2>📝 Publicar un reclamo o propuesta</h2>
+<p class="notice">Versión de prueba: las publicaciones se guardan</p>
+<form id="formulario">
+<label for="categoria">Categoría</label>
+<select id="categoria" required>
+<option value="">Seleccionar categoría</option>
+<option>Limpieza y residuos</option><option>Alumbrado</option>
+<option>Calles y baches</option><option>Seguridad</option>
+<option>Salud</option><option>Educación</option>
+<option>Espacios verdes</option><option>Propuesta comunitaria</option><option>Otro</option>
+</select>
+<label for="lugar">Lugar del reclamo</label>
+<input id="lugar" required maxlength="160" placeholder="Calle, esquina o referencia">
+<label for="detalle">Descripción</label>
+<textarea id="detalle" required maxlength="1200" rows="4" placeholder="Explicá qué sucede o qué proponés"></textarea>
+<label for="urgencia">Urgencia: <output id="valorUrgencia">3</output>/5</label>
+<input id="urgencia" type="range" min="1" max="5" value="3">
+<label for="impacto">Impacto comunitario</label>
+<select id="impacto"><option value="1">Bajo</option><option value="2" selected>Medio</option><option value="3">Alto</option></select>
+<label for="reiteracion">¿Se repite o afecta a varias personas?</label>
+<select id="reiteracion"><option value="1">No se sabe</option><option value="2">Se repite</option><option value="3">Afecta a varias personas</option></select>
+<label for="evidencia"><input id="evidencia" type="checkbox"> Tengo foto u otra evidencia para aportar</label>
+<button type="submit">Publicar aquí</button>
+<p id="respuesta" role="status"></p>
+</form>
+</section>
+
+<section class="card">
+<h2>🏆 Ranking orientativo de reportes</h2>
+<section id="temaSemanal" class="tema-semanal" aria-live="polite">
+  <p class="tema-etiqueta">TEMA COMUNITARIO DE LA PRÓXIMA SEMANA</p>
+  <h3 id="temaSemanalTitulo">Evaluando los reclamos recientes…</h3>
+  <p id="temaSemanalDescripcion">
+    El tema se propone a partir del análisis de los reclamos y sugerencias
+    recibidos durante los últimos 15 días.
+  </p>
+  <p id="temaSemanalMeta" class="tema-meta">
+    Se aplican los criterios de prioridad definidos para el foro.
+  </p>
+</section>
+
+<p class="notice"><strong>Criterios propuestos:</strong> urgencia 35%, impacto comunitario 30%, reiteración 20%, evidencia 10% y reportes similares 5%. Los reportes similares se estiman comparando categoría, ubicación y descripción. La coincidencia es orientativa y no confirma que los casos sean el mismo hecho.</p>
+<div id="listaReportes" aria-live="polite"></div>
+<p class="notice rotacion-foro">
+  <strong>Publicaciones semanales:</strong> los reclamos y sugerencias dejarán
+  de mostrarse en este foro después de QUINCE días y serán reemplazados por
+  las nuevas publicaciones. Los registros anteriores se conservarán en Firebase
+  para las estadísticas y el análisis histórico. Si querés solicitar que tu
+  publicación deje de mostrarse antes de ese plazo, comunicate con la comunidad
+  por sus canales de WhatsApp, Instagram o Facebook.
+</p>
+
+</section>
+
+<section class="card">
+<h2>⚠️ Si hay peligro inmediato</h2>
+<p>Este foro no es un servicio de emergencias y no se supervisa en tiempo real. Ante un riesgo inmediato, contactá directamente al servicio de emergencias correspondiente.</p>
+</section>
+</main>
+
+<footer>
+<p><strong>La Esquina de Iturri tu Barrio</strong></p>
+<p>Hacemos Barrio · Comunidad Activa</p>
+<p><a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<script type="module">
+import { db, conectarUsuario } from "./firebase-init.js";
+import {
+  collection, addDoc, onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const formulario = document.getElementById("formulario");
+const rango = document.getElementById("urgencia");
+const lista = document.getElementById("listaReportes");
+const respuesta = document.getElementById("respuesta");
+
+let reportes = [];
+let enviando = false;
+
+rango.addEventListener("input", () => {
+  document.getElementById("valorUrgencia").textContent = rango.value;
+});
+
+function escapar(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+
+function normalizarTexto(valor) {
+  return String(valor ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\b(avenida|avda|av)\b/g, " ")
+    .replace(/\b(calle|cal)\b/g, " ")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function similitudTexto(a, b) {
+  const ignorar = new Set([
+    "de", "la", "el", "en", "y", "por", "con",
+    "un", "una", "del", "los", "las", "a"
+  ]);
+
+  const palabrasA = new Set(
+    normalizarTexto(a).split(" ").filter(x => x && !ignorar.has(x))
+  );
+  const palabrasB = new Set(
+    normalizarTexto(b).split(" ").filter(x => x && !ignorar.has(x))
+  );
+
+  if (!palabrasA.size || !palabrasB.size) return 0;
+
+  const comunes = [...palabrasA].filter(x => palabrasB.has(x)).length;
+  return comunes / new Set([...palabrasA, ...palabrasB]).size;
+}
+
+
+function fechaDelReporte(r) {
+  // Preferir la marca de tiempo guardada por Firestore.
+  const marca = r.creadoEn;
+
+  if (marca && typeof marca.toDate === "function") {
+    const fecha = marca.toDate();
+    if (!Number.isNaN(fecha.getTime())) return fecha;
+  }
+
+  if (marca && Number.isFinite(marca.seconds)) {
+    return new Date(marca.seconds * 1000);
+  }
+
+  // Compatibilidad con registros antiguos que solo tienen fecha.
+  const texto = String(r.fecha ?? "").trim();
+  const coincidencia = texto.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+
+  if (coincidencia) {
+    return new Date(
+      Number(coincidencia[3]),
+      Number(coincidencia[2]) - 1,
+      Number(coincidencia[1]),
+      12, 0, 0
+    );
+  }
+
+  if (texto) {
+    const fecha = new Date(texto);
+    if (!Number.isNaN(fecha.getTime())) return fecha;
+  }
+
+  // Los registros sin fecha verificable se conservan en Firebase,
+  // pero no se muestran como publicaciones recientes.
+  return null;
+}
+
+
+function fechaVisible(r) {
+  const fecha = fechaDelReporte(r);
+
+  if (!fecha || Number.isNaN(fecha.getTime())) {
+    return "Fecha no disponible";
+  }
+
+  return new Intl.DateTimeFormat("es-AR", {
+    timeZone: "America/Argentina/Buenos_Aires",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  }).format(fecha);
+}
+
+function reportesDeLosUltimosQuinceDias() {
+  const ahora = Date.now();
+  const limite = ahora - 15 * 24 * 60 * 60 * 1000;
+
+  return reportes.filter(r => {
+    const fecha = fechaDelReporte(r);
+    if (!fecha) return false;
+
+    const tiempo = fecha.getTime();
+    return tiempo >= limite && tiempo <= ahora;
+  });
+}
+
+function puntuacion(r, universo = reportes) {
+  const categoria = normalizarTexto(r.categoria);
+  const lugar = normalizarTexto(r.lugar);
+  const detalle = normalizarTexto(r.detalle);
+
+  // La similitud se calcula dentro del conjunto que se está evaluando.
+  const similares = universo.filter(x => {
+    if (x.id === r.id) return false;
+
+    const mismaCategoria =
+      categoria === normalizarTexto(x.categoria);
+    if (!mismaCategoria) return false;
+
+    const otroLugar = normalizarTexto(x.lugar);
+    const otroDetalle = normalizarTexto(x.detalle);
+
+    const lugarCoincide =
+      Boolean(lugar && otroLugar && lugar === otroLugar);
+
+    const descripcionParecida =
+      similitudTexto(detalle, otroDetalle) >= 0.35;
+
+    const ubicacionesRelacionadas =
+      Boolean(lugar && otroLugar) &&
+      (
+        lugar.includes(otroLugar) ||
+        otroLugar.includes(lugar) ||
+        similitudTexto(lugar, otroLugar) >= 0.5
+      );
+
+    return lugarCoincide ||
+      (descripcionParecida && ubicacionesRelacionadas);
+  }).length;
+
+  return Math.round(
+    Number(r.urgencia) / 5 * 35 +
+    Number(r.impacto) / 3 * 30 +
+    Number(r.reiteracion) / 3 * 20 +
+    (r.evidencia ? 10 : 0) +
+    Math.min(similares, 5) / 5 * 5
+  );
+}
+
+
+function reportesSemanaCalendarioAnterior() {
+  return reportesDeLosUltimosQuinceDias();
+}
+
+
+function textoProximaReunion() {
+  const fecha = new Date();
+  fecha.setHours(12, 0, 0, 0);
+
+  // Miércoles = 3. Si hoy es miércoles, mostrar la reunión de hoy.
+  const diasHastaMiercoles = (3 - fecha.getDay() + 7) % 7;
+  fecha.setDate(fecha.getDate() + diasHastaMiercoles);
+
+  return fecha.toLocaleDateString("es-AR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
+
+
+
+function consultarTemaRobot() {
+  const titulo = document.getElementById("temaSemanalTitulo");
+  const descripcion =
+    document.getElementById("temaSemanalDescripcion");
+  const meta = document.getElementById("temaSemanalMeta");
+
+  titulo.textContent = "Consultando el tema comunitario…";
+  descripcion.textContent =
+    "Estamos leyendo el resultado guardado por el robot semanal.";
+  meta.textContent = "Cargando información de la próxima reunión.";
+
+  window.recibirTemaSemanal = function(data) {
+    if (!data || data.ok !== true) {
+      titulo.textContent = "Tema temporalmente no disponible";
+      descripcion.textContent =
+        "No pudimos consultar el resultado del robot. " +
+        "Los reclamos siguen guardados en Firebase.";
+      meta.textContent =
+        "Probá recargar la página más tarde. No se ha borrado el historial.";
+      console.error("Respuesta del robot no válida:", data);
+      return;
+    }
+
+    titulo.textContent = data.tema || "Tema pendiente de evaluación";
+    descripcion.textContent =
+      data.descripcion || "No hay descripción disponible.";
+
+    const fecha = data.fechaReunion
+      ? data.fechaReunion
+      : "fecha pendiente";
+
+    const generado = data.generadoEn
+      ? new Date(data.generadoEn).toLocaleString("es-AR", {
+          dateStyle: "short",
+          timeStyle: "short"
+        })
+      : "fecha no disponible";
+
+    meta.textContent =
+      "Próxima reunión: " + fecha + ". " +
+      "Registros evaluados: " + Number(data.cantidadReportes || 0) + ". " +
+      "Puntaje acumulado de la categoría: " +
+      Number(data.puntajeAcumulado || 0) + ". " +
+      "Último cálculo del robot: " + generado + ". " +
+      "Propuesta orientativa; las urgencias requieren atención independiente.";
+  };
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src =
+    "https://script.google.com/macros/s/" +
+    "AKfycbz4ZiXTM046aBjTYdSc4WALykj6ZCgijbeu8k8EUyPP9joJkO8PdTB68UQp9GSeIpIZOg/exec" +
+    "?v=" + Date.now();
+
+  script.onerror = function() {
+    titulo.textContent = "No se pudo consultar el tema semanal";
+    descripcion.textContent =
+      "El robot no respondió. Los reclamos históricos siguen en Firebase.";
+    meta.textContent =
+      "Recargá la página más tarde o revisá la implementación de Apps Script.";
+  };
+
+  document.head.appendChild(script);
+}
+
+function renderizar() {
+
+  const visibles = reportesDeLosUltimosQuinceDias();
+
+  if (!visibles.length) {
+    lista.innerHTML =
+      "<p>No hay publicaciones recientes para mostrar. " +
+      "Los registros anteriores se conservan en Firebase para las estadísticas.</p>";
+    return;
+  }
+
+  // Orden cronológico obligatorio: más reciente primero.
+  // Se utiliza creadoEn de Firestore, con fecha como alternativa.
+  const ordenados = [...visibles].sort((a, b) => {
+    const fechaA = fechaDelReporte(a);
+    const fechaB = fechaDelReporte(b);
+
+    const tiempoA = fechaA ? fechaA.getTime() : -Infinity;
+    const tiempoB = fechaB ? fechaB.getTime() : -Infinity;
+
+    if (tiempoA !== tiempoB) {
+      return tiempoB - tiempoA;
+    }
+
+    // Si dos reclamos tienen la misma fecha, desempatar por prioridad.
+    return puntuacion(b, visibles) - puntuacion(a, visibles);
+  });
+
+  lista.innerHTML = ordenados.map(r => `
+    <article class="post">
+      <div class="meta">
+        <strong>Reclamo / sugerencia</strong> ·
+        ${escapar(r.categoria)} · ${escapar(fechaVisible(r))}
+      </div>
+      <h3>${escapar(r.lugar)}</h3>
+      <p>${escapar(r.detalle)}</p>
+      <p class="score">
+        Prioridad orientativa: ${puntuacion(r, visibles)}/100
+      </p>
+      <p class="meta">
+        Urgencia: ${escapar(r.urgencia)}/5 ·
+        Impacto: ${escapar(r.impacto)}/3 ·
+        Reiteración: ${escapar(r.reiteracion)}/3 ·
+        Evidencia: ${r.evidencia ? "sí" : "no"}
+      </p>
+      <p class="meta">
+        La puntuación orienta la prioridad, pero no verifica la veracidad
+        ni reemplaza la evaluación de una emergencia.
+      </p>
+    </article>
+  `).join("");
+}
+
+formulario.addEventListener("submit", async e => {
+  e.preventDefault();
+  if (enviando) return;
+
+  enviando = true;
+  const botonPublicar = formulario.querySelector('button[type="submit"]');
+  botonPublicar.disabled = true;
+  respuesta.textContent = "Conectando y guardando el reporte…";
+
+  const reporte = {
+    categoria: document.getElementById("categoria").value,
+    lugar: document.getElementById("lugar").value.trim(),
+    detalle: document.getElementById("detalle").value.trim(),
+    urgencia: Number(rango.value),
+    impacto: Number(document.getElementById("impacto").value),
+    reiteracion: Number(document.getElementById("reiteracion").value),
+    evidencia: document.getElementById("evidencia").checked,
+    fecha: new Intl.DateTimeFormat("es-AR", {
+      timeZone: "America/Argentina/Buenos_Aires",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    }).format(new Date())
+  };
+
+  try {
+    await conectarUsuario();
+    await addDoc(collection(db, "reclamos"), {
+      ...reporte,
+      creadoEn: serverTimestamp()
+    });
+
+    formulario.reset();
+    document.getElementById("valorUrgencia").textContent = "3";
+    respuesta.textContent =
+      "¡Reporte guardado en Firebase! Ya puede aparecer en el ranking compartido.";
+  } catch (error) {
+    console.error("Error al guardar el reporte:", error);
+    respuesta.textContent =
+      "No se pudo guardar el reporte. Revisá la conexión y los permisos de Firebase e intentá nuevamente.";
+  } finally {
+    enviando = false;
+    botonPublicar.disabled = false;
+  }
+});
+
+
+consultarTemaRobot();
+
+try {
+  await conectarUsuario();
+
+  onSnapshot(collection(db, "reclamos"), snapshot => {
+    reportes = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    renderizar();
+  }, error => {
+    console.error("Error al leer reportes:", error);
+    respuesta.textContent =
+      "No se pudieron cargar los reportes. Revisá los permisos de Firestore.";
+  });
+} catch (error) {
+  console.error("Error al conectar con Firebase:", error);
+  respuesta.textContent =
+    "No se pudo conectar con Firebase. Revisá Authentication y la conexión.";
+}
+</script>
+
+<section class="iturri-musica" aria-label="Música del proyecto">
+<label for="iturriCancion">🎵 Música comunitaria</label>
+<select id="iturriCancion" aria-label="Elegir música">
+<option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+<option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+<option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+</select>
+<button id="iturriPlay" type="button" aria-label="Reproducir música">▶</button>
+<audio id="iturriAudio" src="assets/audio/Penguin_Popstar__Brillo.mp3" preload="auto" autoplay></audio>
+</section>
+
+
+
+
+
+
+
+
+<style id="iturri-musica-unificada">
+.iturri-musica {
+  display:flex; align-items:center; justify-content:center;
+  flex-wrap:wrap; gap:14px; padding:16px; margin:18px auto;
+}
+.iturri-musica label { font-weight:700; }
+.iturri-musica select {
+  max-width:270px; padding:9px 12px;
+  border:1px solid #cbd5e1; border-radius:10px;
+}
+#iturriPlay {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:76px; height:76px; min-width:76px;
+  border:0; border-radius:50%; background:#102b55;
+  color:#7cce32; font-size:34px; font-weight:900;
+  cursor:pointer; box-shadow:0 4px 14px #0003;
+}
+#iturriPlay:hover { transform:scale(1.05); }
+#iturriPlay:focus-visible { outline:3px solid #7cce32; outline-offset:4px; }
+#iturriAudio { display:none !important; }
+</style>
+
+
+<script id="iturri-js-musica-unificada">
+(() => {
+  const audio = document.getElementById('iturriAudio');
+  const boton = document.getElementById('iturriPlay');
+  const selector = document.getElementById('iturriCancion');
+
+  if (!audio || !boton) {
+    console.error('No se encontró el audio o el botón de música.');
+    return;
+  }
+
+  audio.volume = 0.35;
+  audio.preload = 'auto';
+
+  function actualizar() {
+    const sonando = !audio.paused && !audio.ended;
+    boton.textContent = sonando ? 'Ⅱ' : '▶';
+    boton.setAttribute('aria-label', sonando ? 'Pausar música' : 'Reproducir música');
+    boton.title = sonando ? 'Pausar música' : 'Reproducir música';
+  }
+
+  async function reproducir() {
+    try {
+      await audio.play();
+    } catch (error) {
+      console.info('El navegador puede requerir pulsar Reproducir.');
+    }
+    actualizar();
+  }
+
+  boton.addEventListener('click', () => {
+    if (audio.paused || audio.ended) reproducir();
+    else {
+      audio.pause();
+      actualizar();
+    }
+  });
+
+  if (selector) {
+    selector.addEventListener('change', () => {
+      const estabaSonando = !audio.paused && !audio.ended;
+      audio.pause();
+      audio.src = selector.value;
+      audio.load();
+      actualizar();
+      if (estabaSonando) reproducir();
+    });
+  }
+
+  audio.addEventListener('play', actualizar);
+  audio.addEventListener('pause', actualizar);
+  audio.addEventListener('ended', actualizar);
+
+  window.addEventListener('load', reproducir);
+  actualizar();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+
+/* =========================================================
+   LA ESQUINA DE ITURRI
+   REDISEÑO ECO-MODERNO COMUNITARIO
+   Se conservan los colores y degradados institucionales.
+   ========================================================= */
+
+:root {
+  --eco-crema: #fffaf1;
+  --eco-marfil: #fffdf8;
+  --eco-texto: #242124;
+  --eco-borde: rgba(65, 49, 45, .10);
+  --eco-sombra: 0 10px 30px rgba(35, 24, 25, .075);
+  --eco-sombra-hover: 0 17px 38px rgba(35, 24, 25, .13);
+  --eco-radio: 22px;
+  --eco-espacio: 30px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    Inter,
+    "Plus Jakarta Sans",
+    Montserrat,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--eco-texto);
+  background-color: var(--eco-crema);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  line-height: 1.7;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-family:
+    Inter,
+    "Plus Jakarta Sans",
+    Montserrat,
+    system-ui,
+    sans-serif;
+  line-height: 1.22;
+  letter-spacing: -.025em;
+  font-weight: 750;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 5vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+}
+
+/* Encabezado y navegación: conservan sus colores actuales. */
+
+header {
+  padding: 19px clamp(18px, 4vw, 46px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  flex-wrap: wrap;
+  box-shadow: 0 5px 20px rgba(0,0,0,.09);
+}
+
+header .marca {
+  font-size: 1.04rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  text-decoration: none;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+header nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .25s ease,
+              color .25s ease,
+              transform .25s ease;
+}
+
+header nav a:hover {
+  transform: translateY(-2px);
+}
+
+/* Franja comunitaria: respeta el fondo y los degradados existentes. */
+
+.iturri-banner {
+  padding: 25px clamp(20px, 4vw, 42px);
+  border-radius: 0 0 20px 20px;
+}
+
+.iturri-banner h2 {
+  margin-bottom: 6px;
+}
+
+.iturri-banner p {
+  margin-bottom: 0;
+}
+
+/* Banner principal: se conserva su gradiente actual. */
+
+.hero {
+  width: min(1180px, calc(100% - 36px));
+  margin: 34px auto 38px;
+  padding: clamp(32px, 6vw, 66px);
+  border-radius: 28px;
+  box-shadow: var(--eco-sombra);
+  overflow: hidden;
+}
+
+.hero > div:first-child {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 13px;
+  margin-bottom: 13px;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 700;
+  background: rgba(255,255,255,.14);
+}
+
+/* Contenido general. */
+
+main {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 18px 0 66px;
+}
+
+main > section {
+  margin-bottom: var(--eco-espacio);
+}
+
+main .card,
+main > .card {
+  padding: clamp(25px, 4vw, 40px);
+  border: 1px solid var(--eco-borde);
+  border-radius: var(--eco-radio);
+  background: var(--eco-marfil);
+  box-shadow: var(--eco-sombra);
+}
+
+main .card > h2:first-child {
+  margin-top: 0;
+  margin-bottom: 19px;
+}
+
+main .card > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tarjetas principales y reclamos. */
+
+.post,
+article.post {
+  padding: 24px;
+  margin: 20px 0;
+  border-radius: 18px;
+  border: 1px solid var(--eco-borde);
+  background: #fffefb;
+  box-shadow: 0 5px 18px rgba(30, 20, 20, .055);
+  transition: transform .25s ease,
+              box-shadow .25s ease,
+              border-color .25s ease;
+}
+
+.post .meta,
+.meta {
+  line-height: 1.55;
+  font-size: .88rem;
+}
+
+.post .score,
+.score {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+/* Tema semanal: se respeta su diseño destacado. */
+
+.tema-semanal {
+  padding: clamp(23px, 4vw, 36px);
+  margin: 25px 0;
+  border-radius: 25px;
+  box-shadow: var(--eco-sombra);
+  overflow-wrap: anywhere;
+}
+
+.tema-semanal h3 {
+  line-height: 1.3;
+}
+
+/* Formularios más claros y espaciosos. */
+
+form {
+  display: grid;
+  gap: 15px;
+}
+
+form label {
+  display: block;
+  margin-top: 5px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 15px;
+  border: 1px solid rgba(45, 35, 35, .17);
+  border-radius: 13px;
+  background: #fffefb;
+  color: var(--eco-texto);
+  font: inherit;
+  transition: border-color .25s ease,
+              box-shadow .25s ease,
+              background-color .25s ease;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #a52b49;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #a52b49;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(180, 45, 75, .18);
+  border-color: #a52b49;
+}
+
+/* Botones sin modificar su identidad cromática. */
+
+button,
+button[type="button"],
+button[type="submit"],
+.button,
+a.button {
+  min-height: 46px;
+  padding: 11px 21px;
+  border-radius: 13px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .25s ease,
+              box-shadow .25s ease,
+              filter .25s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+/* Inscripciones, galerías y tablas. */
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 15px 17px;
+  line-height: 1.55;
+  text-align: left;
+  border-bottom: 1px solid var(--eco-borde);
+}
+
+th {
+  font-weight: 750;
+  background: rgba(120, 75, 65, .07);
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.iturri-musica {
+  gap: 16px;
+  padding: 23px;
+  margin: 30px auto;
+  border-radius: 20px;
+  background: rgba(255, 250, 241, .94);
+  box-shadow: var(--eco-sombra);
+}
+
+/* Avisos, estados y etiquetas. */
+
+.notice {
+  padding: 15px 18px;
+  border-left: 4px solid #a52b49;
+  border-radius: 10px;
+  background: rgba(160, 90, 70, .07);
+  line-height: 1.65;
+}
+
+.badge, .estado, .score-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+/* Pie común. */
+
+footer {
+  margin-top: 45px;
+  padding: 34px 24px;
+  text-align: center;
+  border-radius: 22px 22px 0 0;
+}
+
+footer p {
+  margin-bottom: 8px;
+}
+
+/* Interacciones sutiles: solo en dispositivos con cursor. */
+
+@media (hover: hover) and (pointer: fine) {
+  main .card:hover,
+  .post:hover,
+  article.post:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--eco-sombra-hover);
+  }
+
+  button:hover,
+  a.button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.035);
+  }
+}
+
+/* Adaptación a móviles. */
+
+@media (max-width: 760px) {
+  header {
+    justify-content: center;
+    text-align: center;
+    gap: 13px;
+  }
+
+  header nav {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  header nav a {
+    padding: 9px 11px;
+    font-size: .85rem;
+  }
+
+  .hero {
+    width: calc(100% - 24px);
+    margin: 20px auto 25px;
+    padding: 29px 23px;
+    border-radius: 20px;
+  }
+
+  main {
+    width: calc(100% - 24px);
+    padding-top: 10px;
+  }
+
+  main .card,
+  main > .card {
+    padding: 23px 19px;
+    border-radius: 19px;
+  }
+
+  .post,
+  article.post {
+    padding: 19px 16px;
+  }
+
+  .iturri-musica {
+    padding: 17px;
+    margin: 22px 12px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

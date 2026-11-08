@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>Galería | La Esquina de Iturri tu Barrio</title>
+<style>
+:root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
+*{box-sizing:border-box}body{margin:0;background:var(--crema);color:var(--texto);font:16px/1.6 Arial,Helvetica,sans-serif}
+header{background:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #e4e7df}
+.marca{font-weight:800;color:var(--verde)}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{font-size:.9rem;color:var(--texto);text-decoration:none;font-weight:700}nav a:hover{text-decoration:underline;color:var(--verde)}
+.hero{background:var(--verde);color:white;padding:42px 7%}.hero h1{font-size:clamp(2rem,4vw,3.4rem);margin:8px 0;line-height:1.15}.hero p{max-width:800px}
+main{max-width:1100px;margin:auto;padding:35px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e7df;border-radius:15px;padding:22px;margin-bottom:18px;box-shadow:0 5px 18px #203b2510}.card h2{color:var(--verde);margin-top:0;font-size:1.35rem}
+.emoji{font-size:2rem}.muted{color:#66756c;font-size:.92rem}.notice{background:#fff0d9;padding:12px;border-radius:8px}.item{border-left:4px solid var(--naranja);padding:4px 14px;margin:20px 0}.numero{font-size:2rem;font-weight:800;color:var(--verde)}
+form{display:grid;gap:10px}label{font-weight:700;margin-top:5px}input,select,textarea{font:inherit;width:100%;padding:11px;border:1px solid #c9d3ca;border-radius:8px;background:white}button{background:var(--verde);color:white;border:0;padding:12px 18px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}button:hover{opacity:.9}
+footer{background:#123f32;color:white;text-align:center;padding:24px 6%;margin-top:30px}footer p{margin:4px}@media(max-width:650px){header{align-items:flex-start}nav{gap:8px}.hero{padding:32px 6%}}
+
+/* Identidad visual compartida */
+.iturri-banner {
+  min-height: 145px;
+  padding: 25px 6%;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(15,55,39,.82), rgba(15,55,39,.15)),
+    url('assets/img/banner.jpeg') center 50% / cover no-repeat;
+  color: white;
+}
+.iturri-banner h2 {
+  color: white;
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  text-shadow: 0 2px 5px #0008;
+}
+.iturri-banner p { margin: 5px 0 0; }
+.iturri-musica {
+  background: #fff;
+  border-top: 3px solid #efaa55;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.iturri-musica label { font-weight: bold; }
+.iturri-musica select { max-width: 270px; }
+.iturri-musica audio { width: min(100%, 340px); }
+@media(max-width:600px) {
+  .iturri-banner { min-height: 120px; }
+  .iturri-musica { align-items: stretch; }
+  .iturri-musica select, .iturri-musica audio { max-width: 100%; width: 100%; }
+}
+
+
+/* Corrección de disposición: banner arriba, encabezado debajo */
+.iturri-banner {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 0 !important;
+  width: 100%;
+  margin: 0 !important;
+  float: none !important;
+  clear: both;
+}
+body > header {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 1;
+  width: 100%;
+  margin: 0 !important;
+  float: none !important;
+}
+
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+.galeria-item {
+  background: white;
+  border: 1px solid #e4e7df;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px #203b2510;
+}
+.galeria-item img, .galeria-item video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #e9eee9;
+}
+.galeria-item .descripcion { padding: 12px 15px; }
+.galeria-item h3 { margin: 0; color: #185b45; }
+
+</style>
+</head>
+<body>
+<section class="iturri-banner" aria-label="Identidad de la comunidad">
+  <div>
+    <h2>Hacemos barrio</h2>
+    <p>La Esquina de Iturri · Comunidad activa, solidaria y colaborativa</p>
+  </div>
+</section>
+
+<header><a class="marca" href="index.html" style="text-decoration:none">🏡 La Esquina de Iturri tu Barrio</a><nav aria-label="Navegación principal"><a href="index.html">Inicio</a>
+<a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a>
+<a href="reuniones.html">Reuniones</a>
+<a href="galeria.html">Galería</a>
+<a href="estadisticas.html">Estadísticas</a>
+<a href="app-movil.html">App móvil</a></nav></header>
+
+
+
+
+<section class="hero">
+  <div>📸</div>
+  <h1>Galería comunitaria</h1>
+  <p>Imágenes y videos de La Esquina de Iturri. Explorá el material visual de nuestra comunidad.</p>
+</section>
+
+<main>
+  <section class="card">
+    <h2>🖼️ Fotografías</h2>
+    <p>Imágenes de nuestra comunidad.</p>
+    <div class="galeria-grid">
+
+      <article class="galeria-item">
+        <a href="assets/img/1.png" target="_blank" rel="noopener">
+          <img src="assets/img/1.png" alt="Imagen comunitaria 1" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 1</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/2.png" target="_blank" rel="noopener">
+          <img src="assets/img/2.png" alt="Imagen comunitaria 2" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 2</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/3.png" target="_blank" rel="noopener">
+          <img src="assets/img/3.png" alt="Imagen comunitaria 3" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 3</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/4.png" target="_blank" rel="noopener">
+          <img src="assets/img/4.png" alt="Imagen comunitaria 4" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 4</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/5.png" target="_blank" rel="noopener">
+          <img src="assets/img/5.png" alt="Imagen comunitaria 5" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 5</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/6.png" target="_blank" rel="noopener">
+          <img src="assets/img/6.png" alt="Imagen comunitaria 6" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 6</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/7.png" target="_blank" rel="noopener">
+          <img src="assets/img/7.png" alt="Imagen comunitaria 7" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 7</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/8.png" target="_blank" rel="noopener">
+          <img src="assets/img/8.png" alt="Imagen comunitaria 8" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 8</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/9.png" target="_blank" rel="noopener">
+          <img src="assets/img/9.png" alt="Imagen comunitaria 9" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 9</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/10.png" target="_blank" rel="noopener">
+          <img src="assets/img/10.png" alt="Imagen comunitaria 10" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 10</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/11.png" target="_blank" rel="noopener">
+          <img src="assets/img/11.png" alt="Imagen comunitaria 11" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 11</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/12.png" target="_blank" rel="noopener">
+          <img src="assets/img/12.png" alt="Imagen comunitaria 12" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 12</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/13.png" target="_blank" rel="noopener">
+          <img src="assets/img/13.png" alt="Imagen comunitaria 13" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 13</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/14.png" target="_blank" rel="noopener">
+          <img src="assets/img/14.png" alt="Imagen comunitaria 14" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 14</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/15.png" target="_blank" rel="noopener">
+          <img src="assets/img/15.png" alt="Imagen comunitaria 15" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 15</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/16.png" target="_blank" rel="noopener">
+          <img src="assets/img/16.png" alt="Imagen comunitaria 16" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 16</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <a href="assets/img/17.png" target="_blank" rel="noopener">
+          <img src="assets/img/17.png" alt="Imagen comunitaria 17" loading="lazy">
+        </a>
+        <div class="descripcion"><h3>Imagen 17</h3></div>
+      </article>
+
+    </div>
+  </section>
+  <section class="card">
+    <h2>🎬 Videos</h2>
+    <p>Elegí reproducir cada video con sus controles.</p>
+    <div class="galeria-grid">
+
+      <article class="galeria-item">
+        <video controls preload="metadata">
+          <source src="assets/video/18.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+        <div class="descripcion"><h3>Video 18</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <video controls preload="metadata">
+          <source src="assets/video/19.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+        <div class="descripcion"><h3>Video 19</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <video controls preload="metadata">
+          <source src="assets/video/20.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+        <div class="descripcion"><h3>Video 20</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <video controls preload="metadata">
+          <source src="assets/video/21.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+        <div class="descripcion"><h3>Video 21</h3></div>
+      </article>
+
+      <article class="galeria-item">
+        <video controls preload="metadata">
+          <source src="assets/video/22.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+        <div class="descripcion"><h3>Video 22</h3></div>
+      </article>
+
+    </div>
+  </section>
+</main>
+
+<footer><p><strong>La Esquina de Iturri tu Barrio</strong></p><p>Hacemos Barrio · Comunidad Activa</p><p><a href="index.html" style="color:white">Volver al inicio</a></p></footer>
+
+<section class="iturri-musica" aria-label="Música del proyecto">
+  <label for="iturriCancion">🎵 Música comunitaria</label>
+  <select id="iturriCancion">
+    <option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+    <option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+    <option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+  </select>
+  <audio id="iturriAudio" controls preload="none">
+    <source src="assets/audio/New_Age_Whale__Moody.mp3" type="audio/mpeg">
+    Tu navegador no admite audio.
+  </audio>
+</section>
+<script>
+(() => {
+  const selector = document.getElementById('iturriCancion');
+  const audio = document.getElementById('iturriAudio');
+  if (!selector || !audio) return;
+  selector.addEventListener('change', () => {
+    audio.pause();
+    audio.src = selector.value;
+    audio.load();
+    audio.play().catch(() => {});
+  });
+})();
+</script>
+
+</body></html>

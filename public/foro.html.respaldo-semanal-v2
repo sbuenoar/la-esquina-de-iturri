@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>Foro y urgencias | La Esquina de Iturri tu Barrio</title>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="estilos-comunes.css">
+</head>
+<body>
+<section class="iturri-banner" aria-label="Identidad de la comunidad">
+  <div>
+    <h2>Hacemos barrio</h2>
+    <p>La Esquina de Iturri · Comunidad activa, solidaria y colaborativa</p>
+  </div>
+</section>
+
+<header>
+<a class="marca" href="index.html">🏡 La Esquina de Iturri tu Barrio</a>
+<nav aria-label="Navegación principal">
+<a href="index.html">Inicio</a><a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a><a href="reuniones.html">Reuniones</a>
+<a href="galeria.html">Galería</a><a href="estadisticas.html">Estadísticas</a>
+<a href="app-movil.html">App móvil</a>
+</nav>
+</header>
+
+
+
+
+<section class="hero">
+<div>📣 Comunidad activa</div>
+<h1>Foro y urgencias</h1>
+<p>Contanos qué necesita el barrio. Entre todos podemos organizar los reportes y visualizar qué temas necesitan atención prioritaria.</p>
+</section>
+
+<main>
+
+
+<section class="card">
+<h2>📝 Publicar un reclamo o propuesta</h2>
+<p class="notice">Versión de prueba: las publicaciones se guardan solamente en este navegador. Todavía no se comparten con otros visitantes ni constituyen un canal oficial de emergencias.</p>
+<form id="formulario">
+<label for="categoria">Categoría</label>
+<select id="categoria" required>
+<option value="">Seleccionar categoría</option>
+<option>Limpieza y residuos</option><option>Alumbrado</option>
+<option>Calles y baches</option><option>Seguridad</option>
+<option>Salud</option><option>Educación</option>
+<option>Espacios verdes</option><option>Propuesta comunitaria</option><option>Otro</option>
+</select>
+<label for="lugar">Lugar del reclamo</label>
+<input id="lugar" required maxlength="160" placeholder="Calle, esquina o referencia">
+<label for="detalle">Descripción</label>
+<textarea id="detalle" required maxlength="1200" rows="4" placeholder="Explicá qué sucede o qué proponés"></textarea>
+<label for="urgencia">Urgencia: <output id="valorUrgencia">3</output>/5</label>
+<input id="urgencia" type="range" min="1" max="5" value="3">
+<label for="impacto">Impacto comunitario</label>
+<select id="impacto"><option value="1">Bajo</option><option value="2" selected>Medio</option><option value="3">Alto</option></select>
+<label for="reiteracion">¿Se repite o afecta a varias personas?</label>
+<select id="reiteracion"><option value="1">No se sabe</option><option value="2">Se repite</option><option value="3">Afecta a varias personas</option></select>
+<label for="evidencia"><input id="evidencia" type="checkbox"> Tengo foto u otra evidencia para aportar</label>
+<button type="submit">Publicar en esta demostración</button>
+<p id="respuesta" role="status"></p>
+</form>
+</section>
+
+<section class="card">
+<h2>🏆 Ranking orientativo de reportes</h2>
+<p>Los reportes se ordenan por una puntuación de prioridad. Los votos son opiniones comunitarias y no reemplazan la evaluación de urgencias.</p>
+<p class="notice"><strong>Criterios propuestos:</strong> urgencia 35%, impacto comunitario 30%, reiteración 20%, evidencia 10% y reportes similares 5%. Los reportes similares se estiman comparando categoría, ubicación y descripción. La coincidencia es orientativa y no confirma que los casos sean el mismo hecho.</p>
+<div id="listaReportes" aria-live="polite"></div>
+<button type="button" class="secondary" id="borrarDemo">Borrar publicaciones de prueba de este navegador</button>
+</section>
+
+<section class="card">
+<h2>⚠️ Si hay peligro inmediato</h2>
+<p>Este foro no es un servicio de emergencias y no se supervisa en tiempo real. Ante un riesgo inmediato, contactá directamente al servicio de emergencias correspondiente.</p>
+</section>
+</main>
+
+<footer>
+<p><strong>La Esquina de Iturri tu Barrio</strong></p>
+<p>Hacemos Barrio · Comunidad Activa</p>
+<p><a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<script type="module">
+import { db, conectarUsuario } from "./firebase-init.js";
+import {
+  collection, addDoc, onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const formulario = document.getElementById("formulario");
+const rango = document.getElementById("urgencia");
+const lista = document.getElementById("listaReportes");
+const respuesta = document.getElementById("respuesta");
+const botonBorrar = document.getElementById("borrarDemo");
+
+let reportes = [];
+let enviando = false;
+
+rango.addEventListener("input", () => {
+  document.getElementById("valorUrgencia").textContent = rango.value;
+});
+
+function escapar(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+
+function normalizarTexto(valor) {
+  return String(valor ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\b(avenida|avda|av)\b/g, " ")
+    .replace(/\b(calle|cal)\b/g, " ")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function similitudTexto(a, b) {
+  const ignorar = new Set([
+    "de", "la", "el", "en", "y", "por", "con",
+    "un", "una", "del", "los", "las", "a"
+  ]);
+
+  const palabrasA = new Set(
+    normalizarTexto(a).split(" ").filter(x => x && !ignorar.has(x))
+  );
+  const palabrasB = new Set(
+    normalizarTexto(b).split(" ").filter(x => x && !ignorar.has(x))
+  );
+
+  if (!palabrasA.size || !palabrasB.size) return 0;
+
+  const comunes = [...palabrasA].filter(x => palabrasB.has(x)).length;
+  return comunes / new Set([...palabrasA, ...palabrasB]).size;
+}
+
+function puntuacion(r) {
+  const categoria = normalizarTexto(r.categoria);
+  const lugar = normalizarTexto(r.lugar);
+  const detalle = normalizarTexto(r.detalle);
+
+  const similares = reportes.filter(x => {
+    if (x.id === r.id) return false;
+
+    const mismaCategoria = categoria === normalizarTexto(x.categoria);
+    if (!mismaCategoria) return false;
+
+    const otroLugar = normalizarTexto(x.lugar);
+    const otroDetalle = normalizarTexto(x.detalle);
+
+    const lugarCoincide = lugar === otroLugar;
+    const descripcionParecida = similitudTexto(detalle, otroDetalle) >= 0.35;
+
+    return lugarCoincide || (descripcionParecida && (
+      lugar.includes(otroLugar) ||
+      otroLugar.includes(lugar) ||
+      similitudTexto(lugar, otroLugar) >= 0.5
+    ));
+  }).length;
+
+  return Math.round(
+    Number(r.urgencia) / 5 * 35 +
+    Number(r.impacto) / 3 * 30 +
+    Number(r.reiteracion) / 3 * 20 +
+    (r.evidencia ? 10 : 0) +
+    Math.min(similares, 5) / 5 * 5
+  );
+}
+
+function renderizar() {
+  if (!reportes.length) {
+    lista.innerHTML =
+      "<p>Todavía no hay reportes. Podés publicar el primero.</p>";
+    return;
+  }
+
+  const ordenados = [...reportes].sort(
+    (a, b) => puntuacion(b) - puntuacion(a)
+  );
+
+  lista.innerHTML = ordenados.map((r, i) => `
+    <article class="post">
+      <div class="meta">
+        Puesto ${i + 1} · ${escapar(r.categoria)} · ${escapar(r.fecha)}
+      </div>
+      <h3>${escapar(r.lugar)}</h3>
+      <p>${escapar(r.detalle)}</p>
+      <p class="score">Prioridad orientativa: ${puntuacion(r)}/100</p>
+      <p class="meta">
+        Urgencia: ${escapar(r.urgencia)}/5 ·
+        Impacto: ${escapar(r.impacto)}/3 ·
+        Reiteración: ${escapar(r.reiteracion)}/3 ·
+        Evidencia: ${r.evidencia ? "sí" : "no"}
+      </p>
+      <p class="meta">
+        Ranking orientativo; la puntuación no verifica la veracidad
+        ni reemplaza la evaluación de una emergencia.
+      </p>
+    </article>
+  `).join("");
+}
+
+formulario.addEventListener("submit", async e => {
+  e.preventDefault();
+  if (enviando) return;
+
+  enviando = true;
+  const botonPublicar = formulario.querySelector('button[type="submit"]');
+  botonPublicar.disabled = true;
+  respuesta.textContent = "Conectando y guardando el reporte…";
+
+  const reporte = {
+    categoria: document.getElementById("categoria").value,
+    lugar: document.getElementById("lugar").value.trim(),
+    detalle: document.getElementById("detalle").value.trim(),
+    urgencia: Number(rango.value),
+    impacto: Number(document.getElementById("impacto").value),
+    reiteracion: Number(document.getElementById("reiteracion").value),
+    evidencia: document.getElementById("evidencia").checked,
+    fecha: new Date().toLocaleDateString("es-AR")
+  };
+
+  try {
+    await conectarUsuario();
+    await addDoc(collection(db, "reclamos"), {
+      ...reporte,
+      creadoEn: serverTimestamp()
+    });
+
+    formulario.reset();
+    document.getElementById("valorUrgencia").textContent = "3";
+    respuesta.textContent =
+      "¡Reporte guardado en Firebase! Ya puede aparecer en el ranking compartido.";
+  } catch (error) {
+    console.error("Error al guardar el reporte:", error);
+    respuesta.textContent =
+      "No se pudo guardar el reporte. Revisá la conexión y los permisos de Firebase e intentá nuevamente.";
+  } finally {
+    enviando = false;
+    botonPublicar.disabled = false;
+  }
+});
+
+botonBorrar.addEventListener("click", () => {
+  respuesta.textContent =
+    "Los reportes compartidos no se borran desde este botón.";
+});
+
+try {
+  await conectarUsuario();
+
+  onSnapshot(collection(db, "reclamos"), snapshot => {
+    reportes = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    renderizar();
+  }, error => {
+    console.error("Error al leer reportes:", error);
+    respuesta.textContent =
+      "No se pudieron cargar los reportes. Revisá los permisos de Firestore.";
+  });
+} catch (error) {
+  console.error("Error al conectar con Firebase:", error);
+  respuesta.textContent =
+    "No se pudo conectar con Firebase. Revisá Authentication y la conexión.";
+}
+</script>
+
+<section class="iturri-musica" aria-label="Música del proyecto">
+<label for="iturriCancion">🎵 Música comunitaria</label>
+<select id="iturriCancion" aria-label="Elegir música">
+<option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+<option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+<option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+</select>
+<button id="iturriPlay" type="button" aria-label="Reproducir música">▶</button>
+<audio id="iturriAudio" src="assets/audio/Penguin_Popstar__Brillo.mp3" preload="auto" autoplay></audio>
+</section>
+
+
+
+
+
+
+
+
+<style id="iturri-musica-unificada">
+.iturri-musica {
+  display:flex; align-items:center; justify-content:center;
+  flex-wrap:wrap; gap:14px; padding:16px; margin:18px auto;
+}
+.iturri-musica label { font-weight:700; }
+.iturri-musica select {
+  max-width:270px; padding:9px 12px;
+  border:1px solid #cbd5e1; border-radius:10px;
+}
+#iturriPlay {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:76px; height:76px; min-width:76px;
+  border:0; border-radius:50%; background:#102b55;
+  color:#7cce32; font-size:34px; font-weight:900;
+  cursor:pointer; box-shadow:0 4px 14px #0003;
+}
+#iturriPlay:hover { transform:scale(1.05); }
+#iturriPlay:focus-visible { outline:3px solid #7cce32; outline-offset:4px; }
+#iturriAudio { display:none !important; }
+</style>
+
+
+<script id="iturri-js-musica-unificada">
+(() => {
+  const audio = document.getElementById('iturriAudio');
+  const boton = document.getElementById('iturriPlay');
+  const selector = document.getElementById('iturriCancion');
+
+  if (!audio || !boton) {
+    console.error('No se encontró el audio o el botón de música.');
+    return;
+  }
+
+  audio.volume = 0.35;
+  audio.preload = 'auto';
+
+  function actualizar() {
+    const sonando = !audio.paused && !audio.ended;
+    boton.textContent = sonando ? 'Ⅱ' : '▶';
+    boton.setAttribute('aria-label', sonando ? 'Pausar música' : 'Reproducir música');
+    boton.title = sonando ? 'Pausar música' : 'Reproducir música';
+  }
+
+  async function reproducir() {
+    try {
+      await audio.play();
+    } catch (error) {
+      console.info('El navegador puede requerir pulsar Reproducir.');
+    }
+    actualizar();
+  }
+
+  boton.addEventListener('click', () => {
+    if (audio.paused || audio.ended) reproducir();
+    else {
+      audio.pause();
+      actualizar();
+    }
+  });
+
+  if (selector) {
+    selector.addEventListener('change', () => {
+      const estabaSonando = !audio.paused && !audio.ended;
+      audio.pause();
+      audio.src = selector.value;
+      audio.load();
+      actualizar();
+      if (estabaSonando) reproducir();
+    });
+  }
+
+  audio.addEventListener('play', actualizar);
+  audio.addEventListener('pause', actualizar);
+  audio.addEventListener('ended', actualizar);
+
+  window.addEventListener('load', reproducir);
+  actualizar();
+})();
+</script>
+
+</body>
+</html>

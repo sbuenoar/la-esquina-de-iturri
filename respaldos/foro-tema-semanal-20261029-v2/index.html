@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#185b45">
+  <meta name="description" content="La Esquina de Iturri tu Barrio: una comunidad activa que conecta vecinos, instituciones y proyectos.">
+  <title>La Esquina de Iturri tu Barrio</title>
+  <style>
+    :root {
+      --verde: #185b45;
+      --verde-claro: #e6f1e9;
+      --crema: #fbf7ed;
+      --texto: #23352d;
+      --naranja: #efaa55;
+      --blanco: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background: var(--crema);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--blanco);
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #e4e7df;
+    }
+    .marca { color: var(--verde); font-size: 1.2rem; font-weight: 800; }
+    nav { display: flex; flex-wrap: wrap; gap: 14px; }
+    nav a { color: var(--texto); text-decoration: none; font-size: .9rem; font-weight: 700; }
+    nav a:hover { color: var(--verde); text-decoration: underline; }
+    .hero {
+      padding: 75px 7%;
+      background: var(--verde);
+      color: var(--blanco);
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: center;
+      gap: 35px;
+    }
+    .etiqueta {
+      display: inline-block;
+      background: #ffffff20;
+      border: 1px solid #ffffff50;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: .85rem;
+    }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: 1.05; margin: 20px 0; }
+    .hero p { max-width: 620px; font-size: 1.1rem; }
+    .botones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .boton {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: 800;
+      background: var(--naranja);
+      color: #26352b;
+    }
+    .boton.secundario { background: transparent; color: white; border: 1px solid #ffffff90; }
+    .ilustracion {
+      background: var(--crema);
+      color: var(--verde);
+      padding: 30px;
+      border-radius: 45% 45% 20px 20px;
+      text-align: center;
+      font-size: 5rem;
+      box-shadow: 12px 12px 0 var(--naranja);
+    }
+    .ilustracion p { font-size: 1rem; font-weight: 800; }
+    main { max-width: 1200px; margin: auto; padding: 45px 6%; }
+    .intro { text-align: center; max-width: 700px; margin: 0 auto 32px; }
+    h2 { color: var(--verde); font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.2; }
+    .tarjetas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .tarjeta {
+      background: white;
+      padding: 24px;
+      border: 1px solid #e6e8df;
+      border-radius: 16px;
+      box-shadow: 0 5px 18px #203b2510;
+    }
+    .icono { font-size: 2rem; }
+    .tarjeta h3 { margin-bottom: 8px; color: var(--verde); }
+    .tarjeta a { color: var(--verde); font-weight: 800; }
+    .aviso {
+      background: #f8e7c8;
+      padding: 25px;
+      border-radius: 15px;
+      margin-top: 35px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .aviso strong { font-size: 1.1rem; }
+    footer { background: #123f32; color: white; padding: 28px 6%; text-align: center; }
+    footer p { margin: 5px; }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding: 48px 6%; }
+      .ilustracion { font-size: 3.5rem; }
+      .tarjetas { grid-template-columns: 1fr; }
+      header { align-items: flex-start; }
+      nav { gap: 10px; }
+      .aviso { align-items: flex-start; }
+    }
+  
+/* Identidad visual compartida */
+.iturri-banner {
+  min-height: 145px;
+  padding: 25px 6%;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(15,55,39,.82), rgba(15,55,39,.15)),
+    url('assets/img/banner.jpeg') center 50% / cover no-repeat;
+  color: white;
+}
+.iturri-banner h2 {
+  color: white;
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  text-shadow: 0 2px 5px #0008;
+}
+.iturri-banner p { margin: 5px 0 0; }
+.iturri-musica {
+  background: #fff;
+  border-top: 3px solid #efaa55;
+  padding: 12px 5%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.iturri-musica label { font-weight: bold; }
+.iturri-musica select { max-width: 270px; }
+.iturri-musica audio { width: min(100%, 340px); }
+@media(max-width:600px) {
+  .iturri-banner { min-height: 120px; }
+  .iturri-musica { align-items: stretch; }
+  .iturri-musica select, .iturri-musica audio { max-width: 100%; width: 100%; }
+}
+
+
+/* Corrección de disposición: banner arriba, encabezado debajo */
+.iturri-banner {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 0 !important;
+  width: 100%;
+  margin: 0 !important;
+  float: none !important;
+  clear: both;
+}
+body > header {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  transform: none !important;
+  z-index: 1;
+  width: 100%;
+  margin: 0 !important;
+  float: none !important;
+}
+
+</style>
+
+<style id="iturri-boton-musica-grande">
+#iturriPlay {
+  width: 76px !important;
+  height: 76px !important;
+  min-width: 76px;
+  min-height: 76px;
+  border-radius: 50% !important;
+  background: #001f5b !important;
+  color: #7cce32 !important;
+  border: 3px solid #173d80 !important;
+  font-size: 2.4rem !important;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#iturriPlay:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+#iturriPlay:focus-visible {
+  outline: 3px solid #7cce32;
+  outline-offset: 4px;
+}
+</style>
+
+</head>
+<body>
+  <section class="iturri-banner" aria-label="Identidad de la comunidad">
+  <div>
+    <h2>Hacemos barrio</h2>
+    <p>La Esquina de Iturri · Comunidad activa, solidaria y colaborativa</p>
+  </div>
+</section>
+
+<header>
+    <div class="marca">🏡 La Esquina de Iturri tu Barrio</div>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="foro.html">Foro y urgencias</a>
+      <a href="inscripciones.html">Inscripciones</a>
+      <a href="reuniones.html">Reuniones</a>
+      <a href="galeria.html">Galería</a>
+      <a href="estadisticas.html">Estadísticas</a>
+      <a href="app-movil.html">App móvil</a>
+    </nav>
+  </header>
+
+
+
+
+  <section class="hero">
+    <div>
+      <span class="etiqueta">Hacemos barrio · Comunidad activa</span>
+      <h1>Un barrio mejor se construye entre todos.</h1>
+      <p>Un espacio para conectar vecinos, compartir propuestas, comunicar problemas y acompañar los proyectos de nuestras instituciones.</p>
+      <div class="botones">
+        <a class="boton" href="foro.html">Participar en el barrio →</a>
+        <a class="boton secundario" href="galeria.html">Ver la galería</a>
+      </div>
+    </div>
+    <div class="ilustracion" aria-label="Ilustración de una casa y la comunidad">
+      🏡🌳
+      <p>Tu voz. Tu lugar. Tu comunidad.</p>
+    </div>
+  </section>
+
+  <main>
+    <section class="intro">
+      <h2>Un punto de encuentro para nuestra comunidad</h2>
+      <p>Encontrá la información del barrio y participá de las actividades que nos ayudan a crecer juntos.</p>
+    </section>
+
+    <section class="tarjetas" aria-label="Secciones del sitio">
+      <article class="tarjeta">
+        <div class="icono">📣</div>
+        <h3>Foro y urgencias</h3>
+        <p>Compartí reclamos, señalá necesidades y ayudá a identificar qué situaciones requieren atención prioritaria.</p>
+        <a href="foro.html">Entrar al foro →</a>
+      </article>
+      <article class="tarjeta">
+        <div class="icono">📝</div>
+        <h3>Inscripciones</h3>
+        <p>Consultá las actividades y accedé a los formularios de participación comunitaria.</p>
+        <a href="inscripciones.html">Ver inscripciones →</a>
+      </article>
+      <article class="tarjeta">
+        <div class="icono">📅</div>
+        <h3>Reuniones y ubicación</h3>
+        <p>Encontrá encuentros, reuniones y referencias para llegar a los espacios comunitarios.</p>
+        <a href="reuniones.html">Ver agenda →</a>
+      </article>
+      <article class="tarjeta">
+        <div class="icono">🖼️</div>
+        <h3>Galería comunitaria</h3>
+        <p>Explorá las fotografías, los videos y los lugares que forman parte de la vida del barrio.</p>
+        <a href="galeria.html">Ver galería →</a>
+      </article>
+      <article class="tarjeta">
+        <div class="icono">📊</div>
+        <h3>Transparencia y estadísticas</h3>
+        <p>Una sección para visualizar avances, reclamos y resultados de las iniciativas colectivas.</p>
+        <a href="estadisticas.html">Consultar información →</a>
+      </article>
+      <article class="tarjeta">
+        <div class="icono">📱</div>
+        <h3>La comunidad en tu celular</h3>
+        <p>Conocé la propuesta de aplicación móvil y sus futuras herramientas de participación.</p>
+        <a href="app-movil.html">Ver la app móvil →</a>
+      </article>
+    </section>
+
+    <section class="aviso">
+      <div class="icono">♻️</div>
+      <div>
+        <strong>Un pequeño gesto mejora todo el barrio</strong>
+        <div>Consultá los horarios locales de recolección y mantené los residuos bien cerrados. Los avisos automáticos se incorporarán en una próxima etapa.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>La Esquina de Iturri tu Barrio</strong></p>
+    <p>Hacemos Barrio · Comunidad Activa</p>
+    <p>Un proyecto de participación y colaboración comunitaria.</p>
+  </footer>
+
+<section class="iturri-musica" aria-label="Música del proyecto">
+<label for="iturriCancion">🎵 Música comunitaria</label>
+<select id="iturriCancion" aria-label="Elegir música">
+<option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+<option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+<option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+</select>
+<button id="iturriPlay" type="button" aria-label="Reproducir música">▶</button>
+<audio id="iturriAudio" src="assets/audio/New_Age_Whale__Moody.mp3" preload="auto" autoplay></audio>
+</section>
+<style>
+.iturri-musica{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:14px;margin:18px auto}
+.iturri-musica label{font-weight:bold}
+.iturri-musica select{max-width:270px;padding:8px;border-radius:10px}
+.iturri-musica #iturriPlay{width:58px;height:58px;border:0;border-radius:50%;background:#bfe9ff;color:#7cce32;font-size:29px;font-weight:900;cursor:pointer;box-shadow:0 3px 10px #0002}
+.iturri-musica audio{display:none}
+</style>
+<script>
+(() => {
+ const selector=document.getElementById('iturriCancion');
+ const audio=document.getElementById('iturriAudio');
+ const boton=document.getElementById('iturriPlay');
+ if(!selector||!audio||!boton)return;
+ audio.volume=0.35;
+ function actualizar(){
+  const suena=!audio.paused&&!audio.ended;
+  boton.textContent=suena?'Ⅱ':'▶';
+  boton.setAttribute('aria-label',suena?'Pausar música':'Reproducir música');
+ }
+ boton.addEventListener('click',()=>{
+  if(audio.paused)audio.play().then(actualizar).catch(actualizar);
+  else{audio.pause();actualizar();}
+ });
+ selector.addEventListener('change',()=>{
+  const sonaba=!audio.paused;
+  audio.pause();audio.src=selector.value;audio.load();actualizar();
+  if(sonaba)audio.play().then(actualizar).catch(actualizar);
+ });
+ audio.addEventListener('play',actualizar);
+ audio.addEventListener('pause',actualizar);
+ audio.addEventListener('ended',actualizar);
+ window.addEventListener('load',()=>audio.play().then(actualizar).catch(actualizar));
+ actualizar();
+})();
+</script>
+
+</body>
+</html>

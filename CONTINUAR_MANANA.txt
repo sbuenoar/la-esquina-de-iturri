@@ -1,0 +1,33 @@
+PROYECTO: La Esquina de Iturri tu Barrio
+FIREBASE PROJECT ID: la-esquina-de-iturri-tu-4ead7
+DIRECTORIO: ~/la-esquina-de-iturri
+
+SITIO DE PRODUCCION:
+https://la-esquina-de-iturri-tu-4ead7.web.app/
+
+CANAL DE PRUEBA:
+prueba-foro
+https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/
+
+NO PUBLICAR EN PRODUCCION SIN CONFIRMACION EXPRESA.
+
+TRABAJO PENDIENTE:
+1. Continuar con Inscripciones y Firestore.
+2. Verificar si Firebase Authentication permite el inicio de sesion anonimo.
+3. Verificar si firestore.rules esta publicado.
+4. Probar el formulario y comprobar que los documentos se guarden.
+5. Mantener los datos personales protegidos.
+6. Trabajar primero en el canal de prueba; no desplegar a live.
+7. La musica queda pausada. No retomarla salvo que se solicite.
+
+ESTADO CONFIRMADO:
+- Firestore existe: base de datos (default).
+- Existe public/firebase-init.js.
+- Existe public/inscripciones.html.
+- El formulario intenta guardar en la coleccion inscripciones.
+- Existe firestore.rules con reglas para reclamos, actividades e inscripciones.
+- firebase.json referencia firestore.rules y firestore.indexes.json.
+- Aun falta comprobar autenticacion anonima y reglas publicadas.
+
+ULTIMO PASO COMPLETADO:
+Se revisaron firebase-init.js, inscripciones.html, firestore.rules y firebase.json.

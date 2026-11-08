@@ -1,0 +1,380 @@
+:root {
+  --verde: #185b45;
+  --verde-oscuro: #123f32;
+  --verde-claro: #e6f1e9;
+  --crema: #fbf7ed;
+  --texto: #23352d;
+  --naranja: #efaa55;
+  --blanco: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--texto);
+  background: var(--crema);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--blanco);
+  padding: 16px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e4e7df;
+}
+
+.marca {
+  color: var(--verde);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+nav a {
+  color: var(--texto);
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+nav a:hover {
+  color: var(--verde);
+  text-decoration: underline;
+}
+
+.iturri-banner {
+  min-height: 145px;
+  padding: 25px 6%;
+  display: flex;
+  align-items: center;
+  background-color: var(--verde);
+  background-image:
+    linear-gradient(90deg, rgba(15,55,39,.82), rgba(15,55,39,.15)),
+    url('assets/img/banner.jpeg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.iturri-banner h2 {
+  color: white;
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  text-shadow: 0 2px 5px #0008;
+}
+
+.iturri-banner p {
+  margin: 5px 0 0;
+}
+
+.hero {
+  padding: 48px 7%;
+  background: var(--verde);
+  color: white;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin: 16px 0;
+}
+
+.hero p {
+  max-width: 850px;
+  font-size: 1.05rem;
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 6%;
+}
+
+h2 {
+  color: var(--verde);
+  line-height: 1.25;
+}
+
+.card {
+  background: white;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #e6e8df;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px #203b2510;
+  min-width: 0;
+}
+
+.notice {
+  background: #f8e7c8;
+  padding: 14px 18px;
+  border-radius: 10px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+form label {
+  font-weight: 700;
+  align-self: center;
+}
+
+form input:not([type="checkbox"]):not([type="range"]),
+form select,
+form textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #cbd5c1;
+  border-radius: 8px;
+  background: white;
+  color: var(--texto);
+  font: inherit;
+}
+
+form textarea,
+form button,
+form [role="status"] {
+  grid-column: 1 / -1;
+}
+
+form input[type="checkbox"],
+form input[type="range"] {
+  max-width: 100%;
+}
+
+button,
+.boton {
+  display: inline-block;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--naranja);
+  color: #26352b;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+.boton:hover {
+  filter: brightness(.96);
+}
+
+button.secondary {
+  background: var(--verde);
+  color: white;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.galeria-item {
+  min-width: 0;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e6e8df;
+  border-radius: 14px;
+  box-shadow: 0 5px 18px #203b2510;
+}
+
+.galeria-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.galeria-item .descripcion {
+  padding: 12px 16px;
+}
+
+.galeria-item h3 {
+  color: var(--verde);
+  margin: 0;
+}
+
+footer {
+  background: var(--verde-oscuro);
+  color: white;
+  padding: 28px 6%;
+  text-align: center;
+}
+
+footer p {
+  margin: 5px;
+}
+
+footer a {
+  color: white;
+}
+
+@media (max-width: 760px) {
+  header {
+    align-items: flex-start;
+  }
+
+  nav {
+    gap: 10px;
+  }
+
+  .iturri-banner {
+    min-height: 120px;
+  }
+
+  .hero {
+    padding: 38px 6%;
+  }
+
+  main {
+    padding: 28px 5%;
+  }
+
+  .galeria-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  form,
+  .galeria-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 17px;
+  }
+}
+
+
+/* IDENTIDAD COMUNITARIA ITURRI: NEGRO, ROJO, BLANCO, AZUL Y AMARILLO */
+:root {
+  --iturri-negro: #111111;
+  --iturri-rojo: #c5223b;
+  --iturri-blanco: #ffffff;
+  --iturri-azul: #075ba5;
+  --iturri-amarillo: #f2c52b;
+}
+
+body {
+  color: #202020;
+}
+
+.iturri-banner {
+  background: var(--iturri-negro) !important;
+  color: var(--iturri-blanco) !important;
+  border-top: 5px solid var(--iturri-rojo);
+  border-bottom: 5px solid var(--iturri-amarillo);
+}
+
+.iturri-banner h1,
+.iturri-banner h2,
+.iturri-banner p {
+  color: var(--iturri-blanco) !important;
+}
+
+header {
+  background: var(--iturri-negro) !important;
+  color: var(--iturri-blanco) !important;
+  border-bottom: 4px solid var(--iturri-amarillo);
+}
+
+header .marca,
+header nav a {
+  color: var(--iturri-blanco) !important;
+}
+
+header nav a:hover,
+header nav a:focus-visible {
+  background: var(--iturri-rojo) !important;
+  color: var(--iturri-blanco) !important;
+}
+
+.hero {
+  background: linear-gradient(
+    125deg,
+    var(--iturri-negro) 0%,
+    var(--iturri-rojo) 58%,
+    var(--iturri-azul) 100%
+  ) !important;
+  color: var(--iturri-blanco) !important;
+  border-bottom: 6px solid var(--iturri-amarillo);
+}
+
+.hero h1,
+.hero h2,
+.hero p,
+.hero div {
+  color: var(--iturri-blanco) !important;
+}
+
+main .card {
+  border-top: 4px solid var(--iturri-rojo);
+}
+
+main .card:nth-of-type(even) {
+  border-top-color: var(--iturri-azul);
+}
+
+button[type="submit"],
+button.primary,
+.btn-primary,
+.button-primary {
+  background: var(--iturri-rojo) !important;
+  color: var(--iturri-blanco) !important;
+  border: 2px solid var(--iturri-amarillo) !important;
+  font-weight: 700;
+}
+
+button.secondary {
+  background: var(--iturri-azul) !important;
+  color: var(--iturri-blanco) !important;
+  border: 2px solid var(--iturri-amarillo) !important;
+}
+
+footer {
+  background: var(--iturri-negro) !important;
+  color: var(--iturri-blanco) !important;
+  border-top: 5px solid var(--iturri-rojo);
+}
+
+footer p,
+footer a {
+  color: var(--iturri-blanco) !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--iturri-amarillo);
+  outline-offset: 2px;
+}

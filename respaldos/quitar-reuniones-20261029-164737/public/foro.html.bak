@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>Foro y urgencias | La Esquina de Iturri tu Barrio</title>
+<style>
+:root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
+*{box-sizing:border-box}body{margin:0;background:var(--crema);color:var(--texto);font:16px/1.6 Arial,Helvetica,sans-serif}
+header{background:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #e4e7df}
+.marca{font-weight:800;color:var(--verde)}nav{display:flex;flex-wrap:wrap;gap:12px}nav a{font-size:.9rem;color:var(--texto);text-decoration:none;font-weight:700}nav a:hover{text-decoration:underline;color:var(--verde)}
+.hero{background:var(--verde);color:white;padding:42px 7%}.hero h1{font-size:clamp(2rem,4vw,3.4rem);margin:8px 0;line-height:1.15}.hero p{max-width:800px}
+main{max-width:1100px;margin:auto;padding:35px 6%}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e7df;border-radius:15px;padding:22px;margin-bottom:18px;box-shadow:0 5px 18px #203b2510}.card h2{color:var(--verde);margin-top:0;font-size:1.35rem}
+.emoji{font-size:2rem}.muted{color:#66756c;font-size:.92rem}.notice{background:#fff0d9;padding:12px;border-radius:8px}.item{border-left:4px solid var(--naranja);padding:4px 14px;margin:20px 0}.numero{font-size:2rem;font-weight:800;color:var(--verde)}
+form{display:grid;gap:10px}label{font-weight:700;margin-top:5px}input,select,textarea{font:inherit;width:100%;padding:11px;border:1px solid #c9d3ca;border-radius:8px;background:white}button{background:var(--verde);color:white;border:0;padding:12px 18px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}button:hover{opacity:.9}
+footer{background:#123f32;color:white;text-align:center;padding:24px 6%;margin-top:30px}footer p{margin:4px}@media(max-width:650px){header{align-items:flex-start}nav{gap:8px}.hero{padding:32px 6%}}
+</style>
+</head>
+<body>
+<header><a class="marca" href="index.html" style="text-decoration:none">🏡 La Esquina de Iturri tu Barrio</a><nav aria-label="Navegación principal"><a href="index.html">Inicio</a>
+<a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a>
+<a href="reuniones.html">Reuniones</a>
+<a href="instituciones.html">Instituciones</a>
+<a href="estadisticas.html">Estadísticas</a>
+<a href="app-movil.html">App móvil</a></nav></header>
+<section class="hero"><div>📣</div><h1>Foro y urgencias</h1><p>Contanos qué necesita el barrio. Registrar y organizar los reclamos nos ayudará a identificar prioridades.</p></section>
+<main>
+<section class="card">
+<h2>Registrar un reclamo</h2>
+<p class="notice">Versión inicial: el formulario es una demostración y todavía no envía datos a una base de datos.</p>
+<form id="demoForm">
+<label for="categoria">Categoría</label>
+<select id="categoria" required>
+<option value="">Seleccionar categoría</option>
+<option>Limpieza y residuos</option><option>Alumbrado</option>
+<option>Calles y baches</option><option>Seguridad</option>
+<option>Salud</option><option>Educación</option><option>Espacios verdes</option><option>Otro</option>
+</select>
+<label for="lugar">Lugar del reclamo</label>
+<input id="lugar" required placeholder="Calle, esquina o referencia">
+<label for="detalle">Descripción</label>
+<textarea id="detalle" required rows="4" placeholder="Explicá brevemente qué sucede"></textarea>
+<label for="importancia">Importancia: <output id="valor">3</output>/5</label>
+<input id="importancia" type="range" min="1" max="5" value="3">
+<button type="submit">Probar registro</button>
+<p id="respuesta" role="status"></p>
+</form>
+</section>
+<section class="card"><h2>¿Cómo priorizaremos?</h2><p>En la siguiente etapa calcularemos una prioridad orientativa combinando la cantidad de reportes con la importancia indicada por los vecinos. La evaluación comunitaria no reemplaza los servicios de emergencia.</p><p><strong>Ante un peligro inmediato, contactá al servicio de emergencias correspondiente.</strong></p></section>
+<script>
+const rango=document.querySelector('#importancia');
+rango.addEventListener('input',()=>document.querySelector('#valor').textContent=rango.value);
+document.querySelector('#demoForm').addEventListener('submit',e=>{
+e.preventDefault();
+document.querySelector('#respuesta').textContent='Prueba completada. Este registro no se guardó ni se envió. La conexión segura a la base de datos se configurará en una etapa posterior.';
+});
+</script></main>
+<footer><p><strong>La Esquina de Iturri tu Barrio</strong></p><p>Hacemos Barrio · Comunidad Activa</p><p><a href="index.html" style="color:white">Volver al inicio</a></p></footer>
+</body></html>

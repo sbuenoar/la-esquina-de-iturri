@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function conectado() {
+      return request.auth != null;
+    }
+
+    match /reclamos/{id} {
+      allow read: if true;
+
+      allow create: if conectado()
+        && request.resource.data.keys().hasAll([
+          'categoria', 'lugar', 'detalle', 'urgencia',
+          'impacto', 'reiteracion', 'evidencia', 'fecha'
+        ])
+        && request.resource.data.lugar is string
+        && request.resource.data.detalle is string
+        && request.resource.data.lugar.size() <= 160
+        && request.resource.data.detalle.size() <= 1200;
+
+      allow update, delete: if false;
+
+      match /votos/{votoId} {
+        allow read: if conectado();
+        allow create: if conectado()
+          && votoId == request.auth.uid
+          && request.resource.data.keys().hasOnly(['tipo'])
+          && request.resource.data.tipo in ['meGusta', 'noMeGusta'];
+        allow update, delete: if false;
+      }
+    }
+
+    match /actividades/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /inscripciones/{id} {
+      allow create: if conectado()
+        && request.resource.data.keys().hasAll([
+          'actividad', 'nombre', 'contacto'
+        ])
+        && request.resource.data.nombre is string
+        && request.resource.data.contacto is string;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

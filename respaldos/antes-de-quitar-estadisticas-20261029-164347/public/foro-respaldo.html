@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#185b45">
+<title>Foro y urgencias | La Esquina de Iturri tu Barrio</title>
+<style>
+:root{--verde:#185b45;--crema:#fbf7ed;--texto:#23352d;--naranja:#efaa55}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--texto);font:16px/1.6 Arial,sans-serif}
+header{background:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid #e4e7df}
+.marca{font-weight:800;color:var(--verde);text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:12px}
+nav a{font-size:.9rem;color:var(--texto);text-decoration:none;font-weight:700}
+.hero{background:var(--verde);color:white;padding:38px 7%}
+.hero h1{font-size:clamp(2rem,4vw,3.2rem);margin:8px 0;line-height:1.15}
+main{max-width:1100px;margin:auto;padding:30px 5%}
+.card{background:white;border:1px solid #e4e7df;border-radius:15px;padding:22px;margin-bottom:20px;box-shadow:0 5px 18px #203b2510}
+.card h2{color:var(--verde);margin-top:0}
+.notice{background:#fff0d9;padding:12px;border-radius:8px}
+form{display:grid;gap:9px}
+label{font-weight:700;margin-top:5px}
+input,select,textarea{font:inherit;width:100%;padding:11px;border:1px solid #c9d3ca;border-radius:8px;background:white}
+input[type=checkbox]{width:auto}
+button{background:var(--verde);color:white;border:0;padding:10px 15px;border-radius:8px;font:inherit;font-weight:700;cursor:pointer;margin:3px}
+button.secondary{background:#e8eee8;color:var(--texto)}
+.post{border:1px solid #dce5dc;border-left:5px solid var(--naranja);border-radius:10px;padding:16px;margin:14px 0}
+.post h3{margin:4px 0;color:var(--verde)}
+.meta{font-size:.9rem;color:#617167}
+.score{font-weight:800;color:var(--verde)}
+.player{display:grid;gap:10px}
+audio{width:100%}
+footer{background:#123f32;color:white;text-align:center;padding:24px 6%;margin-top:30px}
+footer a{color:white}
+@media(max-width:650px){header{align-items:flex-start}nav{gap:8px}.hero{padding:30px 6%}}
+</style>
+  <link rel="stylesheet" href="estilos-comunes.css">
+</head>
+<body>
+<header>
+<a class="marca" href="index.html">🏡 La Esquina de Iturri tu Barrio</a>
+<nav aria-label="Navegación principal">
+<a href="index.html">Inicio</a><a href="foro.html">Foro y urgencias</a>
+<a href="inscripciones.html">Inscripciones</a><a href="reuniones.html">Reuniones</a>
+<a href="galeria.html">Galería</a><a href="estadisticas.html">Estadísticas</a>
+<a href="app-movil.html">App móvil</a>
+</nav>
+</header>
+
+<section class="hero">
+<div>📣 Comunidad activa</div>
+<h1>Foro y urgencias</h1>
+<p>Contanos qué necesita el barrio. Entre todos podemos organizar los reportes y visualizar qué temas necesitan atención prioritaria.</p>
+</section>
+
+<main>
+<section class="card">
+<h2>🎵 Música del proyecto</h2>
+<p>Elegí una canción y presioná reproducir cuando quieras escucharla. La música no se inicia automáticamente.</p>
+<div class="player">
+<label for="cancion">Elegir canción</label>
+<select id="cancion">
+<option value="assets/audio/New_Age_Whale__Moody.mp3">New Age Whale — Moody</option>
+<option value="assets/audio/Penguin_Popstar__Brillo.mp3">Penguin Popstar — Brillo</option>
+<option value="assets/audio/Phonky_Frog__Brillo.mp3">Phonky Frog — Brillo</option>
+</select>
+<audio id="audio" controls preload="none">
+<source src="assets/audio/New_Age_Whale__Moody.mp3" type="audio/mpeg">
+Tu navegador no admite audio HTML5.
+</audio>
+<p class="meta">Podés pausar, reanudar y cambiar el volumen desde el reproductor.</p>
+</div>
+</section>
+
+<section class="card">
+<h2>📝 Publicar un reclamo o propuesta</h2>
+<p class="notice">Versión de prueba: las publicaciones se guardan solamente en este navegador. Todavía no se comparten con otros visitantes ni constituyen un canal oficial de emergencias.</p>
+<form id="formulario">
+<label for="categoria">Categoría</label>
+<select id="categoria" required>
+<option value="">Seleccionar categoría</option>
+<option>Limpieza y residuos</option><option>Alumbrado</option>
+<option>Calles y baches</option><option>Seguridad</option>
+<option>Salud</option><option>Educación</option>
+<option>Espacios verdes</option><option>Propuesta comunitaria</option><option>Otro</option>
+</select>
+<label for="lugar">Lugar del reclamo</label>
+<input id="lugar" required maxlength="160" placeholder="Calle, esquina o referencia">
+<label for="detalle">Descripción</label>
+<textarea id="detalle" required maxlength="1200" rows="4" placeholder="Explicá qué sucede o qué proponés"></textarea>
+<label for="urgencia">Urgencia: <output id="valorUrgencia">3</output>/5</label>
+<input id="urgencia" type="range" min="1" max="5" value="3">
+<label for="impacto">Impacto comunitario</label>
+<select id="impacto"><option value="1">Bajo</option><option value="2" selected>Medio</option><option value="3">Alto</option></select>
+<label for="reiteracion">¿Se repite o afecta a varias personas?</label>
+<select id="reiteracion"><option value="1">No se sabe</option><option value="2">Se repite</option><option value="3">Afecta a varias personas</option></select>
+<label for="evidencia"><input id="evidencia" type="checkbox"> Tengo foto u otra evidencia para aportar</label>
+<button type="submit">Publicar en esta demostración</button>
+<p id="respuesta" role="status"></p>
+</form>
+</section>
+
+<section class="card">
+<h2>🏆 Ranking orientativo de reportes</h2>
+<p>Los reportes se ordenan por una puntuación de prioridad. Los votos son opiniones comunitarias y no reemplazan la evaluación de urgencias.</p>
+<p class="notice"><strong>Criterios propuestos:</strong> urgencia 35%, impacto comunitario 30%, reiteración 20%, evidencia 10% y reportes similares 5%. En esta demostración, los reportes similares se estiman por categoría y lugar escrito; el cálculo no verifica que los casos sean realmente iguales.</p>
+<div id="listaReportes" aria-live="polite"></div>
+<button type="button" class="secondary" id="borrarDemo">Borrar publicaciones de prueba de este navegador</button>
+</section>
+
+<section class="card">
+<h2>⚠️ Si hay peligro inmediato</h2>
+<p>Este foro no es un servicio de emergencias y no se supervisa en tiempo real. Ante un riesgo inmediato, contactá directamente al servicio de emergencias correspondiente.</p>
+</section>
+</main>
+
+<footer>
+<p><strong>La Esquina de Iturri tu Barrio</strong></p>
+<p>Hacemos Barrio · Comunidad Activa</p>
+<p><a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<script>
+const audio = document.getElementById('audio');
+document.getElementById('cancion').addEventListener('change', function(){
+  audio.pause();
+  audio.src = this.value;
+  audio.load();
+});
+const rango = document.getElementById('urgencia');
+rango.addEventListener('input', () => {
+  document.getElementById('valorUrgencia').textContent = rango.value;
+});
+
+const CLAVE = 'iturri_foros_demo_v1';
+let reportes = [];
+try { reportes = JSON.parse(localStorage.getItem(CLAVE) || '[]'); }
+catch { reportes = []; }
+
+function guardar(){
+  try { localStorage.setItem(CLAVE, JSON.stringify(reportes)); }
+  catch { document.getElementById('respuesta').textContent = 'No se pudo guardar en este navegador.'; }
+}
+function puntuacion(r){
+  const similares = reportes.filter(x => x.id !== r.id &&
+    x.categoria === r.categoria &&
+    x.lugar.trim().toLowerCase() === r.lugar.trim().toLowerCase()).length;
+  const urgencia = Number(r.urgencia) / 5 * 35;
+  const impacto = Number(r.impacto) / 3 * 30;
+  const reiteracion = Number(r.reiteracion) / 3 * 20;
+  const evidencia = r.evidencia ? 10 : 0;
+  const repeticion = Math.min(similares, 5) / 5 * 5;
+  return Math.round(urgencia + impacto + reiteracion + evidencia + repeticion);
+}
+function escapar(s){
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+function renderizar(){
+  const lista = document.getElementById('listaReportes');
+  if (!reportes.length){
+    lista.innerHTML = '<p>Todavía no hay publicaciones en este navegador. Podés cargar un reporte de prueba con el formulario.</p>';
+    return;
+  }
+  const ordenados = [...reportes].sort((a,b) => puntuacion(b)-puntuacion(a));
+  lista.innerHTML = ordenados.map((r,i) => `
+    <article class="post">
+      <div class="meta">Puesto ${i+1} · ${escapar(r.categoria)} · ${escapar(r.fecha)}</div>
+      <h3>${escapar(r.lugar)}</h3>
+      <p>${escapar(r.detalle)}</p>
+      <p class="score">Prioridad orientativa: ${puntuacion(r)}/100</p>
+      <p class="meta">Criterios: urgencia ${r.urgencia}/5, impacto ${r.impacto}/3, reiteración ${r.reiteracion}/3, evidencia ${r.evidencia?'sí':'no'}. La puntuación no confirma la veracidad del reporte.</p>
+      <button type="button" data-voto="meGusta" data-id="${r.id}">👍 Me gusta (${r.meGusta})</button>
+      <button type="button" class="secondary" data-voto="noMeGusta" data-id="${r.id}">👎 No me gusta (${r.noMeGusta})</button>
+    </article>`).join('');
+}
+document.getElementById('formulario').addEventListener('submit', e => {
+  e.preventDefault();
+  reportes.push({
+    id: Date.now().toString() + Math.random().toString(16).slice(2),
+    categoria: document.getElementById('categoria').value,
+    lugar: document.getElementById('lugar').value.trim(),
+    detalle: document.getElementById('detalle').value.trim(),
+    urgencia: rango.value,
+    impacto: document.getElementById('impacto').value,
+    reiteracion: document.getElementById('reiteracion').value,
+    evidencia: document.getElementById('evidencia').checked,
+    meGusta: 0, noMeGusta: 0,
+    fecha: new Date().toLocaleDateString('es-AR')
+  });
+  guardar();
+  renderizar();
+  e.target.reset();
+  document.getElementById('valorUrgencia').textContent = '3';
+  document.getElementById('respuesta').textContent = 'Publicación de prueba agregada en este navegador.';
+});
+document.getElementById('listaReportes').addEventListener('click', e => {
+  const boton = e.target.closest('button[data-voto]');
+  if (!boton) return;
+  const r = reportes.find(x => x.id === boton.dataset.id);
+  if (!r) return;
+  if (boton.dataset.voto === 'meGusta') r.meGusta++;
+  else r.noMeGusta++;
+  guardar();
+  renderizar();
+});
+document.getElementById('borrarDemo').addEventListener('click', () => {
+  if (!confirm('¿Querés borrar todas las publicaciones de prueba guardadas en este navegador?')) return;
+  reportes = [];
+  guardar();
+  renderizar();
+});
+renderizar();
+</script>
+</body>
+</html>
