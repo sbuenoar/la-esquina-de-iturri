@@ -140,35 +140,36 @@ body > header {
     <div class="emoji">📲</div>
     <h2>Instalá La Esquina de Iturri</h2>
     <p>Agregá nuestra aplicación a tu celular Android y accedé a la comunidad desde tu pantalla de inicio.</p>
-    <button id="iturriInstalar" type="button" style="width:100%;font-size:1.1rem;padding:16px;">
-      INSTALAR LA ESQUINA
-    </button>
+    <a id="iturriInstalar" href="https://la-esquina-de-iturri-tu-4ead7.web.app/downloads/La-Esquina-de-Iturri.apk" download="La-Esquina-de-Iturri.apk"
+       style="display:block;width:100%;box-sizing:border-box;font-size:1.1rem;padding:16px;background:#176b45;color:white;border-radius:12px;text-decoration:none;font-weight:bold;">
+      DESCARGAR E INSTALAR LA ESQUINA
+    </a>
     <p id="iturriEstadoInstalacion" role="status" aria-live="polite">
-      Abrí esta página con Google Chrome en tu Android.
+      Descargá el APK e instalalo en tu dispositivo Android.
     </p>
   </article>
 
   <article class="card" style="text-align:center;">
     <div class="emoji">📷</div>
     <h2>Instalación mediante QR</h2>
-    <p>Escaneá este código con la cámara de tu celular Android.</p>
-    <a href="https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/app-movil.html" target="_blank" rel="noopener noreferrer">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fla-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app%2Fapp-movil.html" alt="Código QR para abrir La Esquina de Iturri"
+    <p>Escaneá el código con tu celular Android para descargar la aplicación.</p>
+    <a href="https://la-esquina-de-iturri-tu-4ead7.web.app/downloads/La-Esquina-de-Iturri.apk" download="La-Esquina-de-Iturri.apk">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Fla-esquina-de-iturri-tu-4ead7.web.app%2Fdownloads%2FLa-Esquina-de-Iturri.apk" alt="Código QR para descargar La Esquina de Iturri para Android"
            width="220" height="220" style="max-width:100%;height:auto;">
     </a>
-    <p><a href="https://la-esquina-de-iturri-tu-4ead7--prueba-foro-fjf9zkkk.web.app/app-movil.html">Abrir La Esquina de Iturri</a></p>
+    <p><a href="https://la-esquina-de-iturri-tu-4ead7.web.app/downloads/La-Esquina-de-Iturri.apk" download="La-Esquina-de-Iturri.apk">Descargar aplicación Android</a></p>
   </article>
 
   <article class="card">
     <div class="emoji">📱</div>
     <h2>¿Cómo instalar?</h2>
     <ol>
-      <li>Abrí el enlace con Google Chrome.</li>
-      <li>Presioná «Instalar» o «Agregar a pantalla principal».</li>
-      <li>Confirmá la instalación.</li>
-      <li>Encontrá el icono de La Esquina en tu celular.</li>
+      <li>Descargá el archivo APK desde el botón o el código QR.</li>
+      <li>Abrí el archivo descargado en tu celular Android.</li>
+      <li>Si Android lo solicita, autorizá la instalación desde esta fuente.</li>
+      <li>Confirmá la instalación y abrí La Esquina de Iturri.</li>
     </ol>
-    <p class="muted">La instalación no requiere descargar un archivo APK.</p>
+    <p class="muted">La aplicación se instala mediante el archivo APK oficial de La Esquina de Iturri.</p>
   </article>
 </section>
 
@@ -223,51 +224,6 @@ body > header {
 
 
 
-<script>
-(() => {
-  let instalacionPendiente = null;
-  const boton = document.getElementById("iturriInstalar");
-  const estado = document.getElementById("iturriEstadoInstalacion");
-
-  if (!boton || !estado) return;
-
-  const instalada = window.matchMedia("(display-mode: standalone)").matches;
-
-  if (instalada) {
-    estado.textContent = "La aplicación ya está instalada en este dispositivo.";
-    boton.textContent = "APLICACIÓN INSTALADA";
-    boton.disabled = true;
-  }
-
-  window.addEventListener("beforeinstallprompt", evento => {
-    evento.preventDefault();
-    instalacionPendiente = evento;
-    estado.textContent = "Tu Android está listo para instalar la aplicación.";
-  });
-
-  boton.addEventListener("click", async () => {
-    if (instalada) return;
-
-    if (instalacionPendiente) {
-      instalacionPendiente.prompt();
-      const resultado = await instalacionPendiente.userChoice;
-      estado.textContent = resultado.outcome === "accepted"
-        ? "¡Perfecto! Se inició la instalación."
-        : "Podés instalarla más tarde desde Chrome.";
-      instalacionPendiente = null;
-    } else {
-      estado.textContent =
-        "En Chrome, abrí el menú ⋮ y elegí «Instalar aplicación» o «Agregar a pantalla principal».";
-    }
-  });
-
-  window.addEventListener("appinstalled", () => {
-    estado.textContent = "¡La Esquina de Iturri quedó instalada!";
-    boton.textContent = "APLICACIÓN INSTALADA";
-    boton.disabled = true;
-  });
-})();
-</script>
 
 <script>
     if ("serviceWorker" in navigator) {
